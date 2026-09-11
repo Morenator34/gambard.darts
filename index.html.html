@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+
+<title>Gambard Darts</title>
+
+<style>
+:root{
+  --panel:rgba(10,10,10,.78);
+  --text:#fff;
+  --muted:#cfcfcf;
+  --accent:#ffcc33;
+  --danger:#ff4d4d;
+  --ok:#50d890;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+}
+
+body{
+  min-height:100vh;
+  background:#111;
+  overflow-x:hidden;
+}
+
+/* =========================
+   WALLPAPER
+   ========================= */
+
+.background{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+
+  background-image:url("wallpaper.jpg.jpeg");
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+
+.background-overlay{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:rgba(0,0,0,.52);
+}
+
+.background-blur{
+  position:fixed;
+  inset:-18px;
+  z-index:-1;
+  backdrop-filter:blur(1.5px);
+  -webkit-backdrop-filter:blur(1.5px);
+  pointer-events:none;
+}
+
+/* =========================
+   APPLICATION
+   ========================= */
+
+.app{
+  width:min(1100px,100%);
+  margin:auto;
+  padding:14px 12px 30px;
+}
+
+header{
+  text-align:center;
+  padding:8px 0 14px;
+}
+
+h1{
+  margin:0;
+  font-size:clamp(30px,7vw,58px);
+  font-weight:900;
+  letter-spacing:1px;
+  text-shadow:
+    0 3px 12px #000,
+    0 1px 2px #000;
+}
+
+.subtitle{
+  margin-top:3px;
+  color:#eee;
+  font-size:13px;
+  text-shadow:0 2px 5px #000;
+}
+
+/* =========================
+   PANELS
+   ========================= */
+
+.panel{
+  background:var(--panel);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:18px;
+  box-shadow:0 12px 35px rgba(0,0,0,.45);
+  padding:14px;
+
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+
+/* =========================
+   SETUP
+   ========================= */
+
+.setup-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.setup-grid .wide{
+  grid-column:1/-1;
+}
+
+label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin:0 0 5px 3px;
+}
+
+input,
+select,
+button{
+  font:inherit;
+  border:0;
+  border-radius:12px;
+}
+
+input,
+select{
+  width:100%;
+  padding:12px;
+  background:rgba(255,255,255,.95);
+  color:#111;
+}
+
+button{
+  padding:12px 14px;
+  background:#fff;
+  color:#111;
+  font-weight:800;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+button.primary{
+  background:var(--accent);
+}
+
+button.dark{
+  background:#292929;
+  color:#fff;
+}
+
+button.danger{
+  background:var(--danger);
+  color:#fff;
+}
+
+button.ok{
+  background:var(--ok);
+  color:#111;
+}
+
+/* =========================
+   JOUEURS
+   ========================= */
+
+.players{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+
+.player-card{
+  padding:12px;
+  border-radius:15px;
+  background:rgba(0,0,0,.48);
+  border:2px solid transparent;
+}
+
+.player-card.active{
+  border-color:var(--accent);
+  box-shadow:0 0 20px rgba(255,204,51,.2);
+}
+
+.player-name{
+  font-weight:900;
+  font-size:18px;
+}
+
+.player-score{
+  font-size:34px;
+  font-weight:900;
+  margin-top:2px;
+}
+
+/* =========================
+   TOUR
+   ========================= */
+
+.turn-info{
+  text-align:center;
+  margin:12px 0;
+  font-weight:800;
+}
+
+.turn-info span{
+  color:var(--accent);
+}
+
+/* =========================
+   JEU
+   ========================= */
+
+.game{
+  display:grid;
+  grid-template-columns:minmax(300px,1fr) minmax(280px,390px);
+  gap:14px;
+  align-items:start;
+  margin-top:14px;
+}
+
+.board-panel{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.board-wrap{
+  width:min(86vw,620px);
+  max-width:620px;
+  aspect-ratio:1;
+}
+
+svg{
+  width:100%;
+  height:100%;
+  display:block;
+
+  filter:drop-shadow(0 12px 18px rgba(0,0,0,.55));
+
+  touch-action:manipulation;
+}
+
+.board-hit{
+  cursor:pointer;
+}
+
+/* =========================
+   BOUTONS
+   ========================= */
+
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:12px;
+  width:100%;
+}
+
+.controls button:first-child{
+  grid-column:1/-1;
+}
+
+/* =========================
+   DARTS DU TOUR
+   ========================= */
+
+.dart-list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+
+.dart{
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  padding:10px 5px;
+  text-align:center;
+}
+
+.dart small{
+  display:block;
+  color:#aaa;
+}
+
+.dart strong{
+  font-size:20px;
+}
+
+/* =========================
+   HISTORIQUE
+   ========================= */
+
+.history{
+  margin-top:10px;
+  max-height:180px;
+  overflow:auto;
+  font-size:13px;
+}
+
+.history-row{
+  display:flex;
+  justify-content:space-between;
+  padding:7px 3px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+/* =========================
+   MESSAGE
+   ========================= */
+
+.message{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:12px;
+  text-align:center;
+  background:rgba(255,255,255,.08);
+  font-weight:800;
+  min-height:40px;
+}
+
+.small-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:10px;
+}
+
+/* =========================
+   FENÊTRE VICTOIRE
+   ========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:18px;
+  z-index:20;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(420px,100%);
+  background:#171717;
+  border:1px solid #444;
+  border-radius:20px;
+  padding:22px;
+  text-align:center;
+
+  box-shadow:0 20px 60px #000;
+}
+
+.modal-box h2{
+  margin:0 0 8px;
+  font-size:30px;
+}
+
+.modal-box p{
+  color:#ddd;
+}
+
+.modal-box button{
+  width:100%;
+  margin-top:8px;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+footer{
+  text-align:center;
+  color:#ddd;
+  font-size:11px;
+  margin-top:12px;
+  text-shadow:0 2px 5px #000;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media(max-width:760px){
+
+  .game{
+    grid-template-columns:1fr;
+  }
+
+  .board-wrap{
+    width:min(94vw,560px);
+  }
+
+  .panel{
+    border-radius:15px;
+  }
+}
+
+@media(max-width:430px){
+
+  .app{
+    padding:8px 8px 22px;
+  }
+
+  .setup-grid{
+    grid-template-columns:1fr;
+  }
+
+  .setup-grid .wide{
+    grid-column:auto;
+  }
+
+  .players{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .player-name{
+    font-size:15px;
+  }
+
+  .player-score{
+    font-size:28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- WALLPAPER -->
+<div class="background"></div>
+<div class="background-overlay"></div>
+<div class="background-blur"></div>
+
+<div class="app">
+
+<header>
+
+  <h1>Gambard Darts</h1>
+
+  <div class="subtitle">
+    Compteur de fléchettes • 301 / 501 / 701
+  </div>
+
+</header>
+
+
+<!-- =========================
+     CONFIGURATION
+     ========================= -->
+
+<section class="panel" id="setup">
+
+  <div class="setup-grid">
+
+    <div>
+      <label for="p1">Joueur 1</label>
+
+      <input
+        id="p1"
+        value="Joueur 1"
+        maxlength="18"
+      >
+    </div>
+
+
+    <div>
+      <label for="p2">Joueur 2</label>
+
+      <input
+        id="p2"
+        value="Joueur 2"
+        maxlength="18"
+      >
+    </div>
+
+
+    <div>
+
+      <label for="startScore">
+        Départ
+      </label>
+
+      <select id="startScore">
+
+        <option value="301">
+          301
+        </option>
+
+        <option value="501" selected>
+          501
+        </option>
+
+        <option value="701">
+          701
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div style="display:flex;align-items:end">
+
+      <button
+        class="primary"
+        style="width:100%"
+        onclick="newGame()"
+      >
+        Nouvelle partie
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     JOUEURS
+     ========================= -->
+
+<section
+  class="players"
+  id="players">
+</section>
+
+
+<div class="turn-info">
+
+  Tour de
+  <span id="activeName">
+    Joueur 1
+  </span>
+
+  • Fléchette
+
+  <span id="dartNumber">
+    1
+  </span>
+
+  /3
+
+</div>
+
+
+<!-- =========================
+     JEU
+     ========================= -->
+
+<section class="game">
+
+
+  <!-- TABLEAU -->
+
+  <div class="panel board-panel">
+
+    <div class="board-wrap">
+
+      <svg
+        id="board"
+        viewBox="-30 -30 560 560"
+        aria-label="Cible de fléchettes">
+      </svg>
+
+    </div>
+
+
+    <div class="controls">
+
+      <button
+        class="dark"
+        onclick="addMiss()">
+        MISS / 0
+      </button>
+
+      <button
+        class="danger"
+        onclick="bust()">
+        BUST
+      </button>
+
+      <button
+        class="dark"
+        onclick="undo()">
+        ↶ Annuler
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- PANNEAU DROIT -->
+
+  <aside class="panel">
+
+    <div
+      style="
+        font-weight:900;
+        font-size:20px
+      ">
+      Tour en cours
+    </div>
+
+
+    <div
+      class="dart-list"
+      id="dartList">
+    </div>
+
+
+    <div
+      class="message"
+      id="message">
+      Clique sur une zone de la cible.
+    </div>
+
+
+    <div class="small-actions">
+
+      <button
+        class="ok"
+        onclick="endTurn()">
+        Fin du tour
+      </button>
+
+      <button
+        class="dark"
+        onclick="newGame()">
+        Recommencer
+      </button>
+
+    </div>
+
+
+    <div
+      style="
+        font-weight:900;
+        margin-top:14px
+      ">
+      Historique
+    </div>
+
+
+    <div
+      class="history"
+      id="history">
+    </div>
+
+  </aside>
+
+</section>
+
+
+<footer>
+  Gambard Darts — BUST = retour au score du début du tour.
+</footer>
+
+</div>
+
+
+<!-- =========================
+     VICTOIRE
+     ========================= -->
+
+<div
+  class="modal"
+  id="winModal">
+
+  <div class="modal-box">
+
+    <h2>
+      🎯 Victoire !
+    </h2>
+
+    <p id="winnerText"></p>
+
+    <button
+      class="primary"
+      onclick="closeWin();newGame()">
+      Nouvelle partie
+    </button>
+
+    <button
+      class="dark"
+      onclick="closeWin()">
+      Fermer
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   ORDRE TRADITIONNEL DES NUMÉROS
+   ===================================================== */
+
+const nums = [
+  20,1,18,4,13,
+  6,10,15,2,17,
+  3,19,7,16,8,
+  11,14,9,12,5
+];
+
+
+/* Namespace SVG */
+
+const NS =
+  "http://www.w3.org/2000/svg";
+
+
+/* =====================================================
+   ÉTAT DE LA PARTIE
+   ===================================================== */
+
+let state = {
+
+  players: [],
+
+  active: 0,
+
+  startScore: 501,
+
+  turnStartScore: 501,
+
+  darts: [],
+
+  history: [],
+
+  gameOver: false
+
+};
+
+
+/* =====================================================
+   RACCOURCI ELEMENT
+   ===================================================== */
+
+function el(id){
+
+  return document.getElementById(id);
+
+}
+
+
+/* =====================================================
+   COORDONNÉES POLAIRES
+   ===================================================== */
+
+function polar(r,a){
+
+  const rad =
+    (a - 90) *
+    Math.PI /
+    180;
+
+  return [
+    r * Math.cos(rad),
+    r * Math.sin(rad)
+  ];
+
+}
+
+
+/* =====================================================
+   POINTS
+   ===================================================== */
+
+function pts(r,a1,a2){
+
+  const p1 =
+    polar(r,a1);
+
+  const p2 =
+    polar(r,a2);
+
+  return `
+    ${p1[0]},${p1[1]}
+    ${p2[0]},${p2[1]}
+  `;
+
+}
+
+
+/* =====================================================
+   SECTEUR SVG
+   ===================================================== */
+
+function sectorPath(
+  r1,
+  r2,
+  a1,
+  a2
+){
+
+  const p1 =
+    polar(r1,a1);
+
+  const p2 =
+    polar(r1,a2);
+
+  const p3 =
+    polar(r2,a2);
+
+  const p4 =
+    polar(r2,a1);
+
+  const large =
+    (a2-a1)>180 ? 1 : 0;
+
+  return `
+    M ${p1[0]} ${p1[1]}
+
+    L ${p3[0]} ${p3[1]}
+
+    A ${r2} ${r2}
+      0 ${large} 0
+      ${p4[0]} ${p4[1]}
+
+    L ${p2[0]} ${p2[1]}
+
+    A ${r1} ${r1}
+      0 ${large} 1
+      ${p1[0]} ${p1[1]}
+
+    Z
+  `;
+
+}
+
+
+/* =====================================================
+   CREATION SVG
+   ===================================================== */
+
+function svgEl(
+  tag,
+  attrs={}
+){
+
+  const x =
+    document.createElementNS(
+      NS,
+      tag
+    );
+
+  Object.entries(attrs)
+    .forEach(([k,v]) => {
+
+      x.setAttribute(k,v);
+
+    });
+
+  return x;
+
+}
+
+
+/* =====================================================
+   DESSIN DU TABLEAU
+   ===================================================== */
+
+function drawBoard(){
+
+  const svg =
+    el("board");
+
+  svg.innerHTML="";
+
+
+  /* Cercle extérieur */
+
+  svg.appendChild(
+    svgEl(
+      "circle",
+      {
+        cx:0,
+        cy:0,
+        r:270,
+        fill:"#111",
+        stroke:"#ddd",
+        "stroke-width":5
+      }
+    )
+  );
+
+
+  /* =================================================
+     SECTEURS
+     ================================================= */
+
+  for(
+    let i=0;
+    i<20;
+    i++
+  ){
+
+    const a1 =
+      i*18 - 9;
+
+    const a2 =
+      i*18 + 9;
+
+    const n =
+      nums[i];
+
+    const group =
+      svgEl(
+        "g",
+        {
+          "data-n":n,
+          class:"board-hit"
+        }
+      );
+
+
+    /* Zone simple extérieure */
+
+    const fill =
+      i%2===0
+      ? "#151515"
+      : "#e8e0cf";
+
+
+    group.appendChild(
+      svgEl(
+        "path",
+        {
+          d:sectorPath(
+            48,
+            212,
+            a1,
+            a2
+          ),
+          fill:fill,
+          stroke:"#333",
+          "stroke-width":1
+        }
+      )
+    );
+
+
+    /* Double */
+
+    group.appendChild(
+      svgEl(
+        "path",
+        {
+          d:sectorPath(
+            212,
+            232,
+            a1,
+            a2
+          ),
+          fill:
+            i%2===0
+            ? "#c62828"
+            : "#1e9d48",
+          stroke:"#111",
+          "stroke-width":2
+        }
+      )
+    );
+
+
+    /* Bord extérieur */
+
+    group.appendChild(
+      svgEl(
+        "path",
+        {
+          d:sectorPath(
+            232,
+            255,
+            a1,
+            a2
+          ),
+          fill:fill,
+          stroke:"#111",
+          "stroke-width":2
+        }
+      )
+    );
+
+
+    /* Triple */
+
+    group.appendChild(
+      svgEl(
+        "path",
+        {
+          d:sectorPath(
+            82,
+            98,
+            a1,
+            a2
+          ),
+          fill:
+            i%2===0
+            ? "#c62828"
+            : "#1e9d48",
+          stroke:"#111",
+          "stroke-width":2
+        }
+      )
+    );
+
+
+    /* Zone simple intérieure */
+
+    group.appendChild(
+      svgEl(
+        "path",
+        {
+          d:sectorPath(
+            98,
+            212,
+            a1,
+            a2
+          ),
+          fill:fill,
+          stroke:"#333",
+          "stroke-width":1
+        }
+      )
+    );
+
+
+    /* Clic */
+
+    group.addEventListener(
+      "click",
+      () => score(n,1)
+    );
+
+
+    svg.appendChild(group);
+
+  }
+
+
+  /* =================================================
+     ANNEAUX
+     ================================================= */
+
+  [
+    48,
+    82,
+    98,
+    212,
+    232,
+    255
+  ].forEach(r=>{
+
+    svg.appendChild(
+      svgEl(
+        "circle",
+        {
+          cx:0,
+          cy:0,
+          r:r,
+          fill:"none",
+          stroke:"#777",
+          "stroke-width":2
+        }
+      )
+    );
+
+  });
+
+
+  /* =================================================
+     BULL
+     ================================================= */
+
+  const bull =
+    svgEl(
+      "g",
+      {
+        class:"board-hit"
+      }
+    );
+
+
+  bull.appendChild(
+    svgEl(
+      "circle",
+      {
+        cx:0,
+        cy:0,
+        r:48,
+        fill:"#188c43",
+        stroke:"#111",
+        "stroke-width":2
+      }
+    )
+  );
+
+
+  bull.appendChild(
+    svgEl(
+      "circle",
+      {
+        cx:0,
+        cy:0,
+        r:20,
+        fill:"#c62828",
+        stroke:"#111",
+        "stroke-width":2
+      }
+    )
+  );
+
+
+  bull.addEventListener(
+    "click",
+    () => score(25,1)
+  );
+
+
+  svg.appendChild(bull);
+
+
+  /* Bullseye = 50 */
+
+  const bullseye =
+    svgEl(
+      "circle",
+      {
+        cx:0,
+        cy:0,
+        r:20,
+        fill:"transparent",
+        class:"board-hit"
+      }
+    );
+
+
+  bullseye.addEventListener(
+    "click",
+    () => score(50,1)
+  );
+
+
+  svg.appendChild(
+    bullseye
+  );
+
+
+  /* =================================================
+     FILS / SEPARATIONS
+     ================================================= */
+
+  for(
+    let i=0;
+    i<20;
+    i++
+  ){
+
+    const a =
+      i*18 - 9;
+
+    const p1 =
+      polar(48,a);
+
+    const p2 =
+      polar(255,a);
+
+    svg.appendChild(
+      svgEl(
+        "line",
+        {
+          x1:p1[0],
+          y1:p1[1],
+          x2:p2[0],
+          y2:p2[1],
+          stroke:"#555",
+          "stroke-width":1
+        }
+      )
+    );
+
+  }
+
+
+  /* =================================================
+     NUMÉROS
+     ================================================= */
+
+  for(
+    let i=0;
+    i<20;
+    i++
+  ){
+
+    const a =
+      i*18;
+
+    const p =
+      polar(270,a);
+
+
+    const t =
+      svgEl(
+        "text",
+        {
+          x:p[0],
+          y:p[1]+8,
+          "text-anchor":"middle",
+          fill:"#fff",
+          "font-size":"22",
+          "font-weight":"900",
+          "paint-order":"stroke",
+          stroke:"#000",
+          "stroke-width":"4"
+        }
+      );
+
+
+    t.textContent =
+      nums[i];
+
+
+    svg.appendChild(t);
+
+  }
+
+}
+
+
+/* =====================================================
+   NOUVELLE PARTIE
+   ===================================================== */
+
+function newGame(){
+
+  const n1 =
+    el("p1")
+      .value
+      .trim()
+    || "Joueur 1";
+
+
+  const n2 =
+    el("p2")
+      .value
+      .trim()
+    || "Joueur 2";
+
+
+  const start =
+    Number(
+      el("startScore").value
+    );
+
+
+  state = {
+
+    players:[
+      {
+        name:n1,
+        score:start
+      },
+      {
+        name:n2,
+        score:start
+      }
+    ],
+
+    active:0,
+
+    startScore:start,
+
+    turnStartScore:start,
+
+    darts:[],
+
+    history:[],
+
+    gameOver:false
+
+  };
+
+
+  render();
+
+}
+
+
+/* =====================================================
+   AFFICHAGE
+   ===================================================== */
+
+function render(){
+
+  el("players").innerHTML =
+    state.players
+      .map(
+        (p,i)=>`
+
+          <div class="player-card
+            ${i===state.active &&
+              !state.gameOver
+              ? "active"
+              : ""}
+          ">
+
+            <div class="player-name">
+              ${escapeHtml(p.name)}
+            </div>
+
+            <div class="player-score">
+              ${p.score}
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+
+  el("activeName")
+    .textContent =
+      state.players[
+        state.active
+      ]?.name || "";
+
+
+  el("dartNumber")
+    .textContent =
+      Math.min(
+        state.darts.length+1,
+        3
+      );
+
+
+  if(state.darts.length){
+
+    el("dartList").innerHTML =
+      state.darts
+        .map(
+          (d,i)=>`
+
+            <div class="dart">
+
+              <small>
+                Dart ${i+1}
+              </small>
+
+              <strong>
+                ${d.label}
+              </strong>
+
+            </div>
+
+          `
+        )
+        .join("");
+
+  }else{
+
+    el("dartList").innerHTML = `
+
+      <div
+        class="dart"
+        style="grid-column:1/-1">
+
+        <small>
+          Prêt
+        </small>
+
+        <strong>
+          —
+        </strong>
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(state.history.length){
+
+    el("history").innerHTML =
+      state.history
+        .slice()
+        .reverse()
+        .map(
+          h=>`
+
+            <div class="history-row">
+
+              <span>
+                ${escapeHtml(h.player)}
+              </span>
+
+              <strong>
+                ${escapeHtml(h.text)}
+              </strong>
+
+            </div>
+
+          `
+        )
+        .join("");
+
+  }else{
+
+    el("history").innerHTML = `
+      <div
+        style="
+          color:#aaa;
+          padding:8px 0
+        ">
+        Aucun tour joué.
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   PROTECTION HTML
+   ===================================================== */
+
+function escapeHtml(s){
+
+  return String(s)
+    .replace(
+      /[&<>"']/g,
+      c => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#039;'
+      }[c])
+    );
+
+}
+
+
+/* =====================================================
+   SCORE
+   ===================================================== */
+
+function score(
+  base,
+  mult
+){
+
+  if(
+    state.gameOver ||
+    state.darts.length>=3
+  ){
+    return;
+  }
+
+
+  const p =
+    state.players[
+      state.active
+    ];
+
+
+  const value =
+    base * mult;
+
+
+  const newScore =
+    p.score - value;
+
+
+  /*
+   ================================================
+   RÈGLE BUST DEMANDÉE
+
+   Bust uniquement si le score passe SOUS 0.
+
+   Donc :
+
+   16 - 8 = 8  → VALIDE
+   1 - 1 = 0   → VICTOIRE
+   1 - 2 = -1  → BUST
+
+   Pas de règle du double-out.
+   ================================================
+  */
+
+  if(newScore < 0){
+
+    bust();
+
+    return;
+
+  }
+
+
+  p.score =
+    newScore;
+
+
+  let label;
+
+
+  if(base===50){
+
+    label =
+      "Bull 50";
+
+  }else if(base===25){
+
+    label =
+      "Bull 25";
+
+  }else{
+
+    label =
+      mult>1
+      ? mult+"×"+base
+      : String(base);
+
+  }
+
+
+  state.darts.push({
+
+    value:value,
+
+    label:label
+
+  });
+
+
+  el("message").textContent =
+    `${label} → reste ${newScore}`;
+
+
+  /* =========================
+     VICTOIRE
+     ========================= */
+
+  if(newScore===0){
+
+    state.gameOver =
+      true;
+
+
+    state.history.push({
+
+      player:p.name,
+
+      text:
+        `${state.darts
+          .map(d=>d.label)
+          .join(", ")}
+        — GAGNÉ 🎯`
+
+    });
+
+
+    render();
+
+
+    el("winnerText")
+      .textContent =
+        `${p.name} gagne la partie !`;
+
+
+    el("winModal")
+      .classList
+      .add("show");
+
+
+    return;
+
+  }
+
+
+  /* =========================
+     3 FLÉCHETTES
+     ========================= */
+
+  if(
+    state.darts.length===3
+  ){
+
+    endTurn(true);
+
+  }
+
+
+  render();
+
+}
+
+
+/* =====================================================
+   MISS
+   ===================================================== */
+
+function addMiss(){
+
+  if(
+    state.gameOver ||
+    state.darts.length>=3
+  ){
+
+    return;
+
+  }
+
+
+  state.darts.push({
+
+    value:0,
+
+    label:"MISS"
+
+  });
+
+
+  el("message").textContent =
+    "MISS → 0 point";
+
+
+  if(
+    state.darts.length===3
+  ){
+
+    endTurn(true);
+
+  }
+
+
+  render();
+
+}
+
+
+/* =====================================================
+   BUST
+   ===================================================== */
+
+function bust(){
+
+  if(state.gameOver){
+
+    return;
+
+  }
+
+
+  const p =
+    state.players[
+      state.active
+    ];
+
+
+  /*
+   Retour au score du début
+   du tour.
+  */
+
+  p.score =
+    state.turnStartScore;
+
+
+  state.history.push({
+
+    player:p.name,
+
+    text:
+      `BUST — retour à ${state.turnStartScore}`
+
+  });
+
+
+  state.darts=[];
+
+
+  el("message").textContent =
+    `BUST ! Score restauré à ${p.score}`;
+
+
+  switchPlayer();
+
+}
+
+
+/* =====================================================
+   FIN DE TOUR
+   ===================================================== */
+
+function endTurn(auto=false){
+
+  if(state.gameOver){
+
+    return;
+
+  }
+
+
+  const p =
+    state.players[
+      state.active
+    ];
+
+
+  if(
+    state.darts.length===0 &&
+    !auto
+  ){
+
+    return;
+
+  }
+
+
+  const total =
+    state.darts.reduce(
+      (s,d)=>s+d.value,
+      0
+    );
+
+
+  state.history.push({
+
+    player:p.name,
+
+    text:
+      `+${total}
+      (${state.darts
+        .map(d=>d.label)
+        .join(", ")})
+      → ${p.score}`
+
+  });
+
+
+  state.darts=[];
+
+
+  switchPlayer();
+
+}
+
+
+/* =====================================================
+   CHANGEMENT DE JOUEUR
+   ===================================================== */
+
+function switchPlayer(){
+
+  state.active =
+    (state.active+1)
+    %
+    state.players.length;
+
+
+  state.turnStartScore =
+    state.players[
+      state.active
+    ].score;
+
+
+  render();
+
+
+  el("message").textContent =
+    `Tour de ${
+      state.players[
+        state.active
+      ].name
+    }`;
+
+}
+
+
+/* =====================================================
+   ANNULER LA DERNIÈRE FLÉCHETTE
+   ===================================================== */
+
+function undo(){
+
+  if(
+    state.gameOver ||
+    state.darts.length===0
+  ){
+
+    return;
+
+  }
+
+
+  const d =
+    state.darts.pop();
+
+
+  state.players[
+    state.active
+  ].score +=
+    d.value;
+
+
+  el("message").textContent =
+    `Annulé : ${d.label}`;
+
+
+  render();
+
+}
+
+
+/* =====================================================
+   FERMER VICTOIRE
+   ===================================================== */
+
+function closeWin(){
+
+  el("winModal")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =====================================================
+   INITIALISATION
+   ===================================================== */
+
+drawBoard();
+
+newGame();
+
+</script>
+
+</body>
+</html>

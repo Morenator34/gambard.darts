@@ -2,65 +2,113 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#b71c1c">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, viewport-fit=cover"
+>
+
+<meta
+  name="theme-color"
+  content="#b71c1c"
+>
 
 <title>Gambard Darts 🎯</title>
 
 <style>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
 :root{
+
   --red:#d62828;
-  --red-dark:#8e1515;
-  --red-light:#ff4545;
+  --red-dark:#941818;
+  --red-light:#ff4b4b;
+
   --green:#159447;
 
-  --panel:rgba(28,28,28,.72);
-  --panel-strong:rgba(24,24,24,.84);
+  --cream:#e8dfca;
+
+  --panel:rgba(35,35,35,.76);
+  --panel-dark:rgba(25,25,25,.86);
 
   --text:#fff;
   --muted:#d0d0d0;
 
-  --danger:#c62828;
   --ok:#49d88b;
+
 }
+
+
+/* =====================================================
+   BASE
+===================================================== */
 
 *{
   box-sizing:border-box;
 }
 
+
 html,
 body{
+
   margin:0;
+
   min-height:100%;
-  font-family:Arial,Helvetica,sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color:var(--text);
+
 }
 
+
 body{
+
   min-height:100vh;
+
   overflow-x:hidden;
-  background:#242424;
+
+  background:#262626;
+
 }
 
 
 /* =====================================================
    WALLPAPER
-   ===================================================== */
+===================================================== */
 
 .background{
+
   position:fixed;
+
   inset:0;
+
   z-index:-3;
 
-  background-image:url("wallpaper.jpg.jpeg");
+  background-image:
+    url("wallpaper.jpg.jpeg");
+
   background-size:cover;
+
   background-position:center center;
+
   background-repeat:no-repeat;
+
 }
 
+
 .background-overlay{
+
   position:fixed;
+
   inset:0;
+
   z-index:-2;
 
   background:
@@ -69,49 +117,67 @@ body{
       rgba(0,0,0,.38),
       rgba(20,20,20,.55)
     );
+
 }
 
+
 .background-blur{
+
   position:fixed;
+
   inset:-20px;
+
   z-index:-1;
 
   backdrop-filter:blur(1px);
+
   -webkit-backdrop-filter:blur(1px);
 
   pointer-events:none;
+
 }
 
 
 /* =====================================================
    APPLICATION
-   ===================================================== */
+===================================================== */
 
 .app{
+
   width:min(1100px,100%);
+
   margin:auto;
 
   padding:
     14px
     12px
     30px;
+
 }
 
 
 /* =====================================================
    TITRE
-   ===================================================== */
+===================================================== */
 
 header{
+
   text-align:center;
-  padding:8px 0 15px;
+
+  padding:
+    8px
+    0
+    15px;
+
 }
 
+
 h1{
+
   margin:0;
 
   font-size:
-    clamp(32px,7vw,60px);
+    clamp(34px,7vw,60px);
 
   font-weight:900;
 
@@ -120,9 +186,12 @@ h1{
   text-shadow:
     0 4px 15px #000,
     0 2px 3px #000;
+
 }
 
+
 .subtitle{
+
   margin-top:4px;
 
   color:#f0f0f0;
@@ -131,15 +200,18 @@ h1{
 
   text-shadow:
     0 2px 6px #000;
+
 }
 
 
 /* =====================================================
-   PANELS
-   ===================================================== */
+   PANNEAUX
+===================================================== */
 
 .panel{
-  background:var(--panel);
+
+  background:
+    var(--panel);
 
   border:
     1px solid
@@ -154,24 +226,30 @@ h1{
   padding:14px;
 
   backdrop-filter:blur(7px);
+
   -webkit-backdrop-filter:blur(7px);
+
 }
 
 
 /* =====================================================
    CONFIGURATION
-   ===================================================== */
+===================================================== */
 
 .setup-grid{
+
   display:grid;
 
   grid-template-columns:
     1fr 1fr;
 
   gap:10px;
+
 }
 
+
 label{
+
   display:block;
 
   font-size:12px;
@@ -183,20 +261,26 @@ label{
     0
     5px
     3px;
+
 }
+
 
 input,
 select,
 button{
+
   font:inherit;
 
   border:0;
 
   border-radius:12px;
+
 }
+
 
 input,
 select{
+
   width:100%;
 
   padding:12px;
@@ -205,9 +289,12 @@ select{
     rgba(255,255,255,.95);
 
   color:#111;
+
 }
 
+
 button{
+
   padding:
     12px
     14px;
@@ -225,22 +312,30 @@ button{
   transition:
     transform .08s,
     filter .15s;
+
 }
+
 
 button:hover{
+
   filter:brightness(1.08);
+
 }
 
+
 button:active{
+
   transform:scale(.97);
+
 }
 
 
 /* =====================================================
    BOUTONS ROUGES
-   ===================================================== */
+===================================================== */
 
 button.primary{
+
   background:
     linear-gradient(
       135deg,
@@ -252,15 +347,22 @@ button.primary{
 
   box-shadow:
     0 5px 16px
-    rgba(214,40,40,.3);
+    rgba(214,40,40,.30);
+
 }
+
 
 button.dark{
-  background:#3a3a3a;
+
+  background:#3b3b3b;
+
   color:#fff;
+
 }
 
+
 button.danger{
+
   background:
     linear-gradient(
       135deg,
@@ -269,19 +371,25 @@ button.danger{
     );
 
   color:#fff;
+
 }
 
+
 button.ok{
+
   background:var(--ok);
+
   color:#111;
+
 }
 
 
 /* =====================================================
    JOUEURS
-   ===================================================== */
+===================================================== */
 
 .players{
+
   display:grid;
 
   grid-template-columns:
@@ -290,9 +398,12 @@ button.ok{
   gap:10px;
 
   margin-top:10px;
+
 }
 
+
 .player-card{
+
   padding:12px;
 
   border-radius:15px;
@@ -307,36 +418,48 @@ button.ok{
   box-shadow:
     0 7px 20px
     rgba(0,0,0,.25);
+
 }
 
+
 .player-card.active{
-  border-color:var(--red-light);
+
+  border-color:
+    var(--red-light);
 
   box-shadow:
     0 0 22px
-    rgba(214,40,40,.32);
+    rgba(214,40,40,.35);
+
 }
 
+
 .player-name{
+
   font-weight:900;
 
   font-size:18px;
+
 }
 
+
 .player-score{
+
   font-size:34px;
 
   font-weight:900;
 
   margin-top:2px;
+
 }
 
 
 /* =====================================================
-   TOUR
-   ===================================================== */
+   INFORMATIONS TOUR
+===================================================== */
 
 .turn-info{
+
   text-align:center;
 
   margin:12px 0;
@@ -345,18 +468,23 @@ button.ok{
 
   text-shadow:
     0 2px 5px #000;
+
 }
 
+
 .turn-info span{
+
   color:#ff5555;
+
 }
 
 
 /* =====================================================
-   JEU
-   ===================================================== */
+   ZONE DE JEU
+===================================================== */
 
 .game{
+
   display:grid;
 
   grid-template-columns:
@@ -368,31 +496,40 @@ button.ok{
   align-items:start;
 
   margin-top:14px;
+
 }
 
+
 .board-panel{
+
   display:flex;
 
   flex-direction:column;
 
   align-items:center;
+
 }
 
 
 /* =====================================================
    CIBLE
-   ===================================================== */
+===================================================== */
 
 .board-wrap{
+
   width:min(86vw,620px);
 
   max-width:620px;
 
   aspect-ratio:1;
+
 }
 
+
 svg{
+
   width:100%;
+
   height:100%;
 
   display:block;
@@ -404,18 +541,23 @@ svg{
     );
 
   touch-action:manipulation;
+
 }
 
-.board-hit{
+
+.board-zone{
+
   cursor:pointer;
+
 }
 
 
 /* =====================================================
    COMMANDES
-   ===================================================== */
+===================================================== */
 
 .controls{
+
   display:grid;
 
   grid-template-columns:
@@ -426,18 +568,24 @@ svg{
   margin-top:12px;
 
   width:100%;
+
 }
 
+
 .controls button:first-child{
-  grid-column:1/-1;
+
+  grid-column:
+    1 / -1;
+
 }
 
 
 /* =====================================================
    DARTS
-   ===================================================== */
+===================================================== */
 
 .dart-list{
+
   display:grid;
 
   grid-template-columns:
@@ -446,9 +594,12 @@ svg{
   gap:8px;
 
   margin-top:10px;
+
 }
 
+
 .dart{
+
   background:
     rgba(255,255,255,.09);
 
@@ -461,24 +612,32 @@ svg{
   padding:10px 5px;
 
   text-align:center;
+
 }
 
+
 .dart small{
+
   display:block;
 
   color:#aaa;
+
 }
 
+
 .dart strong{
-  font-size:20px;
+
+  font-size:18px;
+
 }
 
 
 /* =====================================================
    HISTORIQUE
-   ===================================================== */
+===================================================== */
 
 .history{
+
   margin-top:10px;
 
   max-height:180px;
@@ -486,9 +645,12 @@ svg{
   overflow:auto;
 
   font-size:13px;
+
 }
 
+
 .history-row{
+
   display:flex;
 
   justify-content:space-between;
@@ -499,18 +661,22 @@ svg{
 
   border-bottom:
     1px solid
-    rgba(255,255,255,.1);
+    rgba(255,255,255,.10);
+
 }
 
 
 /* =====================================================
    MESSAGE
-   ===================================================== */
+===================================================== */
 
 .message{
+
   margin-top:10px;
 
-  padding:10px 12px;
+  padding:
+    10px
+    12px;
 
   border-radius:12px;
 
@@ -522,9 +688,12 @@ svg{
   font-weight:800;
 
   min-height:40px;
+
 }
 
+
 .small-actions{
+
   display:grid;
 
   grid-template-columns:
@@ -533,40 +702,49 @@ svg{
   gap:9px;
 
   margin-top:10px;
+
 }
 
 
 /* =====================================================
    VICTOIRE
-   ===================================================== */
+===================================================== */
 
 .modal{
+
   position:fixed;
 
   inset:0;
 
   background:
-    rgba(0,0,0,.72);
+    rgba(0,0,0,.74);
 
   display:none;
 
   align-items:center;
+
   justify-content:center;
 
   padding:18px;
 
   z-index:20;
+
 }
+
 
 .modal.show{
+
   display:flex;
+
 }
 
+
 .modal-box{
+
   width:min(420px,100%);
 
   background:
-    rgba(30,30,30,.96);
+    rgba(30,30,30,.97);
 
   border:
     1px solid
@@ -581,33 +759,44 @@ svg{
   box-shadow:
     0 20px 60px
     #000;
+
 }
 
+
 .modal-box h2{
+
   margin:
     0
     0
     8px;
 
   font-size:30px;
+
 }
+
 
 .modal-box p{
+
   color:#ddd;
+
 }
 
+
 .modal-box button{
+
   width:100%;
 
   margin-top:8px;
+
 }
 
 
 /* =====================================================
    FOOTER
-   ===================================================== */
+===================================================== */
 
 footer{
+
   text-align:center;
 
   color:#ddd;
@@ -618,59 +807,81 @@ footer{
 
   text-shadow:
     0 2px 5px #000;
+
 }
 
 
 /* =====================================================
    MOBILE
-   ===================================================== */
+===================================================== */
 
 @media(max-width:760px){
 
   .game{
+
     grid-template-columns:1fr;
+
   }
+
 
   .board-wrap{
+
     width:min(94vw,560px);
+
   }
 
-  .panel{
-    border-radius:15px;
-  }
 }
 
 
 @media(max-width:430px){
 
   .app{
+
     padding:
       8px
       8px
       22px;
+
   }
+
 
   .setup-grid{
+
     grid-template-columns:1fr;
+
   }
+
 
   .players{
+
     grid-template-columns:
       1fr 1fr;
+
   }
+
 
   .player-name{
+
     font-size:15px;
+
   }
+
 
   .player-score{
+
     font-size:28px;
+
   }
 
+
   h1{
+
     font-size:36px;
+
   }
+
 }
+
 </style>
 </head>
 
@@ -680,7 +891,7 @@ footer{
 
 <!-- =====================================================
      FOND
-     ===================================================== -->
+===================================================== -->
 
 <div class="background"></div>
 
@@ -694,7 +905,7 @@ footer{
 
 <!-- =====================================================
      TITRE
-     ===================================================== -->
+===================================================== -->
 
 <header>
 
@@ -711,7 +922,7 @@ footer{
 
 <!-- =====================================================
      CONFIGURATION
-     ===================================================== -->
+===================================================== -->
 
 <section class="panel">
 
@@ -776,7 +987,7 @@ footer{
     <div
       style="
         display:flex;
-        align-items:end
+        align-items:end;
       "
     >
 
@@ -797,7 +1008,7 @@ footer{
 
 <!-- =====================================================
      JOUEURS
-     ===================================================== -->
+===================================================== -->
 
 <section
   class="players"
@@ -807,7 +1018,7 @@ footer{
 
 <!-- =====================================================
      TOUR
-     ===================================================== -->
+===================================================== -->
 
 <div class="turn-info">
 
@@ -830,30 +1041,29 @@ footer{
 
 <!-- =====================================================
      JEU
-     ===================================================== -->
+===================================================== -->
 
 <section class="game">
 
 
 <!-- =====================================================
      CIBLE
-     ===================================================== -->
+===================================================== -->
 
 <div class="panel board-panel">
 
   <div class="board-wrap">
 
     <!--
-      IMPORTANT :
-      viewBox corrigé.
-      La cible est maintenant parfaitement centrée.
+      CIBLE CENTRÉE
+      viewBox : -280 -280 560 560
     -->
 
     <svg
       id="board"
-      viewBox="-285 -285 570 570"
-      aria-label="Cible de fléchettes">
-    </svg>
+      viewBox="-280 -280 560 560"
+      aria-label="Cible de fléchettes"
+    ></svg>
 
   </div>
 
@@ -889,15 +1099,15 @@ footer{
 
 
 <!-- =====================================================
-     PANNEAU DROIT
-     ===================================================== -->
+     PANNEAU TOUR
+===================================================== -->
 
 <aside class="panel">
 
   <div
     style="
       font-weight:900;
-      font-size:20px
+      font-size:20px;
     "
   >
     Tour en cours
@@ -906,8 +1116,8 @@ footer{
 
   <div
     class="dart-list"
-    id="dartList">
-  </div>
+    id="dartList"
+  ></div>
 
 
   <div
@@ -941,7 +1151,7 @@ footer{
   <div
     style="
       font-weight:900;
-      margin-top:14px
+      margin-top:14px;
     "
   >
     Historique
@@ -951,8 +1161,7 @@ footer{
   <div
     class="history"
     id="history"
-  >
-  </div>
+  ></div>
 
 </aside>
 
@@ -960,7 +1169,11 @@ footer{
 
 
 <footer>
-  Gambard Darts 🎯 — BUST = retour au score du début du tour.
+
+  Gambard Darts 🎯
+  —
+  BUST = retour au score du début du tour.
+
 </footer>
 
 </div>
@@ -968,7 +1181,7 @@ footer{
 
 <!-- =====================================================
      FENÊTRE VICTOIRE
-     ===================================================== -->
+===================================================== -->
 
 <div
   class="modal"
@@ -1006,26 +1219,24 @@ footer{
 
 <script>
 
+
 /* =====================================================
-   ORDRE TRADITIONNEL
-   ===================================================== */
+   ORDRE TRADITIONNEL DE LA CIBLE
+===================================================== */
 
 const nums = [
 
-  20,1,18,4,13,
-
-  6,10,15,2,17,
-
-  3,19,7,16,8,
-
-  11,14,9,12,5
+  20, 1, 18, 4, 13,
+  6, 10, 15, 2, 17,
+  3, 19, 7, 16, 8,
+  11, 14, 9, 12, 5
 
 ];
 
 
 /* =====================================================
    SVG
-   ===================================================== */
+===================================================== */
 
 const NS =
   "http://www.w3.org/2000/svg";
@@ -1033,7 +1244,7 @@ const NS =
 
 /* =====================================================
    ÉTAT DU JEU
-   ===================================================== */
+===================================================== */
 
 let state = {
 
@@ -1055,8 +1266,8 @@ let state = {
 
 
 /* =====================================================
-   ELEMENT
-   ===================================================== */
+   RÉCUPÉRER UN ÉLÉMENT
+===================================================== */
 
 function el(id){
 
@@ -1066,13 +1277,16 @@ function el(id){
 
 
 /* =====================================================
-   COORDONNÉES
-   ===================================================== */
+   COORDONNÉES POLAIRES
 
-function polar(r,a){
+   0° = vers le haut
+   puis sens horaire
+===================================================== */
+
+function polar(r, angle){
 
   const rad =
-    (a-90) *
+    (angle - 90) *
     Math.PI /
     180;
 
@@ -1088,8 +1302,12 @@ function polar(r,a){
 
 
 /* =====================================================
-   SECTEUR
-   ===================================================== */
+   SECTEUR CORRECT
+
+   IMPORTANT :
+   Les arcs sont dessinés dans le bon ordre.
+   Cela évite les triangles/croisements.
+===================================================== */
 
 function sectorPath(
   r1,
@@ -1098,38 +1316,46 @@ function sectorPath(
   a2
 ){
 
-  const p1 =
-    polar(r1,a1);
-
-  const p2 =
-    polar(r1,a2);
-
-  const p3 =
-    polar(r2,a2);
-
-  const p4 =
+  const outer1 =
     polar(r2,a1);
 
-  const large =
-    (a2-a1)>180
-      ? 1
-      : 0;
+  const outer2 =
+    polar(r2,a2);
+
+  const inner1 =
+    polar(r1,a1);
+
+  const inner2 =
+    polar(r1,a2);
+
 
   return `
 
-    M ${p1[0]} ${p1[1]}
+    M
+      ${outer1[0]}
+      ${outer1[1]}
 
-    L ${p3[0]} ${p3[1]}
+    A
+      ${r2}
+      ${r2}
+      0
+      0
+      1
+      ${outer2[0]}
+      ${outer2[1]}
 
-    A ${r2} ${r2}
-      0 ${large} 0
-      ${p4[0]} ${p4[1]}
+    L
+      ${inner2[0]}
+      ${inner2[1]}
 
-    L ${p2[0]} ${p2[1]}
-
-    A ${r1} ${r1}
-      0 ${large} 1
-      ${p1[0]} ${p1[1]}
+    A
+      ${r1}
+      ${r1}
+      0
+      0
+      0
+      ${inner1[0]}
+      ${inner1[1]}
 
     Z
 
@@ -1139,8 +1365,8 @@ function sectorPath(
 
 
 /* =====================================================
-   CRÉATION SVG
-   ===================================================== */
+   CRÉATION D'UN ÉLÉMENT SVG
+===================================================== */
 
 function svgEl(
   tag,
@@ -1153,11 +1379,16 @@ function svgEl(
       tag
     );
 
+
   Object.entries(attrs)
     .forEach(
-      ([k,v]) =>
-        x.setAttribute(k,v)
+      ([key,value]) =>
+        x.setAttribute(
+          key,
+          value
+        )
     );
+
 
   return x;
 
@@ -1165,39 +1396,52 @@ function svgEl(
 
 
 /* =====================================================
-   DESSIN CIBLE
-   ===================================================== */
+   DESSIN DE LA CIBLE
+===================================================== */
 
 function drawBoard(){
 
   const svg =
     el("board");
 
+
   svg.innerHTML="";
 
 
-  /* ================================================
-     FOND EXTÉRIEUR
-     ================================================ */
+  /* ===================================================
+     CERCLE EXTÉRIEUR
+  =================================================== */
 
   svg.appendChild(
+
     svgEl(
       "circle",
       {
         cx:0,
         cy:0,
-        r:270,
+        r:268,
         fill:"#111",
         stroke:"#aaa",
         "stroke-width":5
       }
     )
+
   );
 
 
-  /* ================================================
+  /* ===================================================
      SECTEURS
-     ================================================ */
+
+     Dimensions inspirées d'une vraie cible :
+     
+     Bullseye : 16
+     Bull     : 32
+     Simple   : 32 → 102
+     Triple   : 102 → 115
+     Simple   : 115 → 214
+     Double   : 214 → 228
+     Extérieur: 228 → 255
+  =================================================== */
 
   for(
     let i=0;
@@ -1205,257 +1449,323 @@ function drawBoard(){
     i++
   ){
 
-    const a1 =
-      i*18 - 9;
-
-    const a2 =
-      i*18 + 9;
-
-    const n =
+    const number =
       nums[i];
 
 
-    const group =
-      svgEl(
-        "g",
-        {
-          "data-n":n
-        }
-      );
+    const a1 =
+      i * 18 - 9;
 
 
-    /*
-      COULEURS TRADITIONNELLES
-    */
-
-    const dark =
-      i%2===0
-      ? "#151515"
-      : "#e8dfca";
+    const a2 =
+      i * 18 + 9;
 
 
-    const red =
-      i%2===0
-      ? "#c62828"
-      : "#159447";
+    const isBlack =
+      i % 2 === 0;
 
 
-    /* ==========================================
-       ZONE SIMPLE INTÉRIEURE
-       ========================================== */
+    const normalColor =
+      isBlack
+        ? "#151515"
+        : "#e8dfca";
 
-    const singleInner =
+
+    const redColor =
+      isBlack
+        ? "#c62828"
+        : "#159447";
+
+
+    /* ===============================================
+       SIMPLE INTÉRIEUR
+    =============================================== */
+
+    const simpleInner =
       svgEl(
         "path",
         {
-          d:sectorPath(
-            48,
-            82,
-            a1,
-            a2
-          ),
-          fill:dark,
+          d:
+            sectorPath(
+              32,
+              102,
+              a1,
+              a2
+            ),
+
+          fill:
+            normalColor,
+
           stroke:"#444",
-          "stroke-width":1
+
+          "stroke-width":1,
+
+          class:"board-zone"
         }
       );
 
 
-    singleInner.addEventListener(
+    simpleInner.addEventListener(
       "click",
-      e=>{
+      function(e){
+
         e.stopPropagation();
-        score(n,1,"Simple");
+
+        score(
+          number,
+          1,
+          "Simple"
+        );
+
       }
     );
 
 
-    group.appendChild(
-      singleInner
+    svg.appendChild(
+      simpleInner
     );
 
 
-    /* ==========================================
+    /* ===============================================
        TRIPLE
-       ========================================== */
+    =============================================== */
 
     const triple =
       svgEl(
         "path",
         {
-          d:sectorPath(
-            82,
-            98,
-            a1,
-            a2
-          ),
-          fill:red,
+          d:
+            sectorPath(
+              102,
+              115,
+              a1,
+              a2
+            ),
+
+          fill:
+            redColor,
+
           stroke:"#111",
-          "stroke-width":2
+
+          "stroke-width":2,
+
+          class:"board-zone"
         }
       );
 
 
     triple.addEventListener(
       "click",
-      e=>{
+      function(e){
+
         e.stopPropagation();
-        score(n,3,"Triple");
+
+        score(
+          number,
+          3,
+          "Triple"
+        );
+
       }
     );
 
 
-    group.appendChild(
+    svg.appendChild(
       triple
     );
 
 
-    /* ==========================================
-       ZONE SIMPLE EXTÉRIEURE
-       ========================================== */
+    /* ===============================================
+       SIMPLE EXTÉRIEUR
+    =============================================== */
 
-    const singleOuter =
+    const simpleOuter =
       svgEl(
         "path",
         {
-          d:sectorPath(
-            98,
-            212,
-            a1,
-            a2
-          ),
-          fill:dark,
+          d:
+            sectorPath(
+              115,
+              214,
+              a1,
+              a2
+            ),
+
+          fill:
+            normalColor,
+
           stroke:"#444",
-          "stroke-width":1
+
+          "stroke-width":1,
+
+          class:"board-zone"
         }
       );
 
 
-    singleOuter.addEventListener(
+    simpleOuter.addEventListener(
       "click",
-      e=>{
+      function(e){
+
         e.stopPropagation();
-        score(n,1,"Simple");
+
+        score(
+          number,
+          1,
+          "Simple"
+        );
+
       }
     );
 
 
-    group.appendChild(
-      singleOuter
+    svg.appendChild(
+      simpleOuter
     );
 
 
-    /* ==========================================
+    /* ===============================================
        DOUBLE
-       ========================================== */
+    =============================================== */
 
     const double =
       svgEl(
         "path",
         {
-          d:sectorPath(
-            212,
-            232,
-            a1,
-            a2
-          ),
-          fill:red,
+          d:
+            sectorPath(
+              214,
+              228,
+              a1,
+              a2
+            ),
+
+          fill:
+            redColor,
+
           stroke:"#111",
-          "stroke-width":2
+
+          "stroke-width":2,
+
+          class:"board-zone"
         }
       );
 
 
     double.addEventListener(
       "click",
-      e=>{
+      function(e){
+
         e.stopPropagation();
-        score(n,2,"Double");
+
+        score(
+          number,
+          2,
+          "Double"
+        );
+
       }
     );
 
 
-    group.appendChild(
+    svg.appendChild(
       double
     );
 
 
-    /* ==========================================
+    /* ===============================================
        COURONNE EXTÉRIEURE
-       ========================================== */
+    =============================================== */
 
     const outer =
       svgEl(
         "path",
         {
-          d:sectorPath(
-            232,
-            255,
-            a1,
-            a2
-          ),
-          fill:dark,
-          stroke:"#111",
-          "stroke-width":2
+          d:
+            sectorPath(
+              228,
+              255,
+              a1,
+              a2
+            ),
+
+          fill:
+            normalColor,
+
+          stroke:"#333",
+
+          "stroke-width":1,
+
+          class:"board-zone"
         }
       );
 
 
     outer.addEventListener(
       "click",
-      e=>{
+      function(e){
+
         e.stopPropagation();
-        score(n,1,"Simple");
+
+        score(
+          number,
+          1,
+          "Simple"
+        );
+
       }
     );
 
 
-    group.appendChild(
-      outer
-    );
-
-
     svg.appendChild(
-      group
+      outer
     );
 
   }
 
 
-  /* ================================================
-     FILS / ANNEAUX
-     ================================================ */
+  /* ===================================================
+     CERCLES DES ANNEAUX
+  =================================================== */
 
   [
-    48,
-    82,
-    98,
-    212,
-    232,
+
+    32,
+    102,
+    115,
+    214,
+    228,
     255
-  ].forEach(r=>{
 
-    svg.appendChild(
-      svgEl(
-        "circle",
-        {
-          cx:0,
-          cy:0,
-          r:r,
-          fill:"none",
-          stroke:"#777",
-          "stroke-width":2,
-          "pointer-events":"none"
-        }
-      )
-    );
+  ].forEach(
 
-  });
+    function(r){
+
+      svg.appendChild(
+
+        svgEl(
+          "circle",
+          {
+            cx:0,
+            cy:0,
+            r:r,
+            fill:"none",
+            stroke:"#777",
+            "stroke-width":1.5,
+            "pointer-events":"none"
+          }
+        )
+
+      );
+
+    }
+
+  );
 
 
-  /* ================================================
-     SÉPARATIONS
-     ================================================ */
+  /* ===================================================
+     LIGNES DE SÉPARATION
+  =================================================== */
 
   for(
     let i=0;
@@ -1463,18 +1773,26 @@ function drawBoard(){
     i++
   ){
 
-    const a =
-      i*18 - 9;
+    const angle =
+      i * 18 - 9;
 
 
     const p1 =
-      polar(48,a);
+      polar(
+        32,
+        angle
+      );
+
 
     const p2 =
-      polar(255,a);
+      polar(
+        255,
+        angle
+      );
 
 
     svg.appendChild(
+
       svgEl(
         "line",
         {
@@ -1482,19 +1800,23 @@ function drawBoard(){
           y1:p1[1],
           x2:p2[0],
           y2:p2[1],
+
           stroke:"#555",
+
           "stroke-width":1,
+
           "pointer-events":"none"
         }
       )
+
     );
 
   }
 
 
-  /* ================================================
+  /* ===================================================
      BULL 25
-     ================================================ */
+  =================================================== */
 
   const bull =
     svgEl(
@@ -1502,19 +1824,27 @@ function drawBoard(){
       {
         cx:0,
         cy:0,
-        r:48,
+        r:32,
         fill:"#159447",
         stroke:"#111",
-        "stroke-width":2
+        "stroke-width":2,
+        class:"board-zone"
       }
     );
 
 
   bull.addEventListener(
     "click",
-    e=>{
+    function(e){
+
       e.stopPropagation();
-      score(25,1,"Bull");
+
+      score(
+        25,
+        1,
+        "Bull"
+      );
+
     }
   );
 
@@ -1524,9 +1854,9 @@ function drawBoard(){
   );
 
 
-  /* ================================================
+  /* ===================================================
      BULLSEYE 50
-     ================================================ */
+  =================================================== */
 
   const bullseye =
     svgEl(
@@ -1534,19 +1864,27 @@ function drawBoard(){
       {
         cx:0,
         cy:0,
-        r:20,
+        r:16,
         fill:"#c62828",
         stroke:"#111",
-        "stroke-width":2
+        "stroke-width":2,
+        class:"board-zone"
       }
     );
 
 
   bullseye.addEventListener(
     "click",
-    e=>{
+    function(e){
+
       e.stopPropagation();
-      score(50,1,"Bullseye");
+
+      score(
+        50,
+        1,
+        "Bullseye"
+      );
+
     }
   );
 
@@ -1556,9 +1894,9 @@ function drawBoard(){
   );
 
 
-  /* ================================================
+  /* ===================================================
      NUMÉROS
-     ================================================ */
+  =================================================== */
 
   for(
     let i=0;
@@ -1566,20 +1904,23 @@ function drawBoard(){
     i++
   ){
 
-    const a =
-      i*18;
+    const angle =
+      i * 18;
 
 
     const p =
-      polar(270,a);
+      polar(
+        264,
+        angle
+      );
 
 
-    const t =
+    const text =
       svgEl(
         "text",
         {
           x:p[0],
-          y:p[1]+8,
+          y:p[1] + 8,
 
           "text-anchor":
             "middle",
@@ -1603,11 +1944,13 @@ function drawBoard(){
       );
 
 
-    t.textContent =
+    text.textContent =
       nums[i];
 
 
-    svg.appendChild(t);
+    svg.appendChild(
+      text
+    );
 
   }
 
@@ -1616,11 +1959,11 @@ function drawBoard(){
 
 /* =====================================================
    NOUVELLE PARTIE
-   ===================================================== */
+===================================================== */
 
 function newGame(){
 
-  const n1 =
+  const name1 =
     el("p1")
       .value
       .trim()
@@ -1628,7 +1971,7 @@ function newGame(){
     "Joueur 1";
 
 
-  const n2 =
+  const name2 =
     el("p2")
       .value
       .trim()
@@ -1638,21 +1981,22 @@ function newGame(){
 
   const start =
     Number(
-      el("startScore").value
+      el("startScore")
+        .value
     );
 
 
-  state={
+  state = {
 
     players:[
 
       {
-        name:n1,
+        name:name1,
         score:start
       },
 
       {
-        name:n2,
+        name:name2,
         score:start
       }
 
@@ -1678,6 +2022,8 @@ function newGame(){
       "Clique sur une zone de la cible.";
 
 
+  closeWin();
+
   render();
 
 }
@@ -1685,41 +2031,61 @@ function newGame(){
 
 /* =====================================================
    AFFICHAGE
-   ===================================================== */
+===================================================== */
 
 function render(){
 
-  el("players").innerHTML =
+  /* ===============================================
+     JOUEURS
+  =============================================== */
 
-    state.players
-      .map(
-        (p,i)=>`
+  el("players")
+    .innerHTML =
 
-          <div
-            class="player-card
-              ${
-                i===state.active &&
-                !state.gameOver
-                ? "active"
-                : ""
-              }
-            "
-          >
+      state.players
+        .map(
+          function(player,index){
 
-            <div class="player-name">
-              ${escapeHtml(p.name)}
-            </div>
+            return `
 
-            <div class="player-score">
-              ${p.score}
-            </div>
+              <div
+                class="
+                  player-card
+                  ${
+                    index === state.active &&
+                    !state.gameOver
+                      ? "active"
+                      : ""
+                  }
+                "
+              >
 
-          </div>
+                <div class="player-name">
 
-        `
-      )
-      .join("");
+                  ${escapeHtml(
+                    player.name
+                  )}
 
+                </div>
+
+                <div class="player-score">
+
+                  ${player.score}
+
+                </div>
+
+              </div>
+
+            `;
+
+          }
+        )
+        .join("");
+
+
+  /* ===============================================
+     JOUEUR ACTIF
+  =============================================== */
 
   el("activeName")
     .textContent =
@@ -1728,114 +2094,137 @@ function render(){
       ]?.name || "";
 
 
+  /* ===============================================
+     NUMÉRO FLÉCHETTE
+  =============================================== */
+
   el("dartNumber")
     .textContent =
+
       Math.min(
-        state.darts.length+1,
+        state.darts.length + 1,
         3
       );
 
 
-  /* ==========================================
-     DARTS DU TOUR
-     ========================================== */
+  /* ===============================================
+     DARTS
+  =============================================== */
 
   if(
-    state.darts.length
+    state.darts.length > 0
   ){
 
-    el("dartList").innerHTML =
+    el("dartList")
+      .innerHTML =
 
-      state.darts
-        .map(
-          (d,i)=>`
+        state.darts
+          .map(
+            function(dart,index){
 
-            <div class="dart">
+              return `
 
-              <small>
-                Dart ${i+1}
-              </small>
+                <div class="dart">
 
-              <strong>
-                ${d.label}
-              </strong>
+                  <small>
+                    Dart ${index + 1}
+                  </small>
 
-            </div>
+                  <strong>
+                    ${escapeHtml(
+                      dart.label
+                    )}
+                  </strong>
 
-          `
-        )
-        .join("");
+                </div>
+
+              `;
+
+            }
+          )
+          .join("");
 
   }else{
 
-    el("dartList").innerHTML = `
+    el("dartList")
+      .innerHTML = `
 
-      <div
-        class="dart"
-        style="grid-column:1/-1"
-      >
+        <div
+          class="dart"
+          style="grid-column:1/-1"
+        >
 
-        <small>
-          Prêt
-        </small>
+          <small>
+            Prêt
+          </small>
 
-        <strong>
-          —
-        </strong>
+          <strong>
+            —
+          </strong>
 
-      </div>
+        </div>
 
-    `;
+      `;
 
   }
 
 
-  /* ==========================================
+  /* ===============================================
      HISTORIQUE
-     ========================================== */
+  =============================================== */
 
   if(
-    state.history.length
+    state.history.length > 0
   ){
 
-    el("history").innerHTML =
+    el("history")
+      .innerHTML =
 
-      state.history
-        .slice()
-        .reverse()
-        .map(
-          h=>`
+        state.history
+          .slice()
+          .reverse()
+          .map(
+            function(item){
 
-            <div class="history-row">
+              return `
 
-              <span>
-                ${escapeHtml(h.player)}
-              </span>
+                <div class="history-row">
 
-              <strong>
-                ${escapeHtml(h.text)}
-              </strong>
+                  <span>
+                    ${escapeHtml(
+                      item.player
+                    )}
+                  </span>
 
-            </div>
+                  <strong>
+                    ${escapeHtml(
+                      item.text
+                    )}
+                  </strong>
 
-          `
-        )
-        .join("");
+                </div>
+
+              `;
+
+            }
+          )
+          .join("");
 
   }else{
 
-    el("history").innerHTML = `
+    el("history")
+      .innerHTML = `
 
-      <div
-        style="
-          color:#aaa;
-          padding:8px 0
-        "
-      >
-        Aucun tour joué.
-      </div>
+        <div
+          style="
+            color:#aaa;
+            padding:8px 0;
+          "
+        >
+          Aucun tour joué.
+        </div>
 
-    `;
+      `;
 
   }
 
@@ -1844,40 +2233,43 @@ function render(){
 
 /* =====================================================
    PROTECTION HTML
-   ===================================================== */
+===================================================== */
 
-function escapeHtml(s){
+function escapeHtml(value){
 
-  return String(s)
+  return String(value)
     .replace(
       /[&<>"']/g,
-      c=>({
+      function(char){
 
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;',
-        "'":'&#039;'
+        return {
 
-      }[c])
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#039;"
+
+        }[char];
+
+      }
     );
 
 }
 
 
 /* =====================================================
-   SCORE
-   ===================================================== */
+   AJOUT D'UN SCORE
+===================================================== */
 
 function score(
   base,
-  mult,
+  multiplier,
   type
 ){
 
   if(
-    state.gameOver ||
-    state.darts.length>=3
+    state.gameOver
   ){
 
     return;
@@ -1885,33 +2277,42 @@ function score(
   }
 
 
-  const p =
+  if(
+    state.darts.length >= 3
+  ){
+
+    return;
+
+  }
+
+
+  const player =
     state.players[
       state.active
     ];
 
 
   const value =
-    base * mult;
+    base * multiplier;
 
 
   const newScore =
-    p.score - value;
+    player.score - value;
 
 
-  /* ==========================================
+  /* =================================================
      BUST
 
-     Uniquement si score < 0.
+     On bust uniquement si le score devient négatif.
 
      Exemple :
 
      16 - 8 = 8  → OK
 
-     1 - 1 = 0   → VICTOIRE
+     1 - 1 = 0   → GAGNÉ
 
      1 - 2 = -1  → BUST
-     ========================================== */
+  ================================================= */
 
   if(
     newScore < 0
@@ -1924,24 +2325,30 @@ function score(
   }
 
 
-  p.score =
+  player.score =
     newScore;
 
 
   let label;
 
 
-  if(type==="Bullseye"){
+  if(
+    type === "Bullseye"
+  ){
 
     label =
       "Bullseye 50";
 
-  }else if(type==="Bull"){
+  }
+  else if(
+    type === "Bull"
+  ){
 
     label =
       "Bull 25";
 
-  }else{
+  }
+  else{
 
     label =
       type +
@@ -1962,27 +2369,33 @@ function score(
 
   el("message")
     .textContent =
+
       `${label} → reste ${newScore}`;
 
 
-  /* ==========================================
+  /* =================================================
      VICTOIRE
-     ========================================== */
+  ================================================= */
 
   if(
-    newScore===0
+    newScore === 0
   ){
 
-    state.gameOver=true;
+    state.gameOver =
+      true;
 
 
     state.history.push({
 
-      player:p.name,
+      player:
+        player.name,
 
       text:
         `${state.darts
-          .map(d=>d.label)
+          .map(
+            dart =>
+              dart.label
+          )
           .join(", ")}
         — GAGNÉ 🎯`
 
@@ -1994,7 +2407,8 @@ function score(
 
     el("winnerText")
       .textContent =
-        `${p.name} gagne la partie !`;
+
+        `${player.name} gagne la partie !`;
 
 
     el("winModal")
@@ -2007,15 +2421,17 @@ function score(
   }
 
 
-  /* ==========================================
+  /* =================================================
      3 FLÉCHETTES
-     ========================================== */
+  ================================================= */
 
   if(
-    state.darts.length===3
+    state.darts.length === 3
   ){
 
     endTurn(true);
+
+    return;
 
   }
 
@@ -2027,13 +2443,21 @@ function score(
 
 /* =====================================================
    MISS
-   ===================================================== */
+===================================================== */
 
 function addMiss(){
 
   if(
-    state.gameOver ||
-    state.darts.length>=3
+    state.gameOver
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    state.darts.length >= 3
   ){
 
     return;
@@ -2056,10 +2480,12 @@ function addMiss(){
 
 
   if(
-    state.darts.length===3
+    state.darts.length === 3
   ){
 
     endTurn(true);
+
+    return;
 
   }
 
@@ -2071,7 +2497,7 @@ function addMiss(){
 
 /* =====================================================
    BUST
-   ===================================================== */
+===================================================== */
 
 function bust(){
 
@@ -2084,21 +2510,24 @@ function bust(){
   }
 
 
-  const p =
+  const player =
     state.players[
       state.active
     ];
 
 
-  /* Retour au score du début du tour */
+  /* ===============================================
+     RETOUR AU SCORE DU DÉBUT DU TOUR
+  =============================================== */
 
-  p.score =
+  player.score =
     state.turnStartScore;
 
 
   state.history.push({
 
-    player:p.name,
+    player:
+      player.name,
 
     text:
       `BUST — retour à ${state.turnStartScore}`
@@ -2111,7 +2540,8 @@ function bust(){
 
   el("message")
     .textContent =
-      `BUST ! Score restauré à ${p.score}`;
+
+      `BUST ! Score restauré à ${player.score}`;
 
 
   switchPlayer();
@@ -2121,7 +2551,7 @@ function bust(){
 
 /* =====================================================
    FIN DU TOUR
-   ===================================================== */
+===================================================== */
 
 function endTurn(auto=false){
 
@@ -2134,14 +2564,14 @@ function endTurn(auto=false){
   }
 
 
-  const p =
+  const player =
     state.players[
       state.active
     ];
 
 
   if(
-    state.darts.length===0 &&
+    state.darts.length === 0 &&
     !auto
   ){
 
@@ -2152,21 +2582,27 @@ function endTurn(auto=false){
 
   const total =
     state.darts.reduce(
-      (s,d)=>s+d.value,
+      function(sum,dart){
+
+        return sum + dart.value;
+
+      },
       0
     );
 
 
   state.history.push({
 
-    player:p.name,
+    player:
+      player.name,
 
     text:
-      `+${total}
-      (${state.darts
-        .map(d=>d.label)
-        .join(", ")})
-      → ${p.score}`
+      `+${total} (${state.darts
+        .map(
+          dart =>
+            dart.label
+        )
+        .join(", ")}) → ${player.score}`
 
   });
 
@@ -2181,11 +2617,12 @@ function endTurn(auto=false){
 
 /* =====================================================
    CHANGEMENT DE JOUEUR
-   ===================================================== */
+===================================================== */
 
 function switchPlayer(){
 
   state.active =
+
     (
       state.active + 1
     )
@@ -2194,6 +2631,7 @@ function switchPlayer(){
 
 
   state.turnStartScore =
+
     state.players[
       state.active
     ].score;
@@ -2204,6 +2642,7 @@ function switchPlayer(){
 
   el("message")
     .textContent =
+
       `Tour de ${
         state.players[
           state.active
@@ -2214,14 +2653,13 @@ function switchPlayer(){
 
 
 /* =====================================================
-   ANNULER
-   ===================================================== */
+   ANNULER LA DERNIÈRE FLÉCHETTE
+===================================================== */
 
 function undo(){
 
   if(
-    state.gameOver ||
-    state.darts.length===0
+    state.gameOver
   ){
 
     return;
@@ -2229,19 +2667,29 @@ function undo(){
   }
 
 
-  const d =
+  if(
+    state.darts.length === 0
+  ){
+
+    return;
+
+  }
+
+
+  const dart =
     state.darts.pop();
 
 
   state.players[
     state.active
   ].score +=
-    d.value;
+    dart.value;
 
 
   el("message")
     .textContent =
-      `Annulé : ${d.label}`;
+
+      `Annulé : ${dart.label}`;
 
 
   render();
@@ -2250,8 +2698,8 @@ function undo(){
 
 
 /* =====================================================
-   FERMER VICTOIRE
-   ===================================================== */
+   FERMER FENÊTRE VICTOIRE
+===================================================== */
 
 function closeWin(){
 
@@ -2264,11 +2712,12 @@ function closeWin(){
 
 /* =====================================================
    INITIALISATION
-   ===================================================== */
+===================================================== */
 
 drawBoard();
 
 newGame();
+
 
 </script>
 

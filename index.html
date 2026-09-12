@@ -3,25 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#111111">
+<meta name="theme-color" content="#b71c1c">
 
-<title>Gambard Darts</title>
+<title>Gambard Darts 🎯</title>
 
 <style>
 :root{
-  --panel:rgba(10,10,10,.78);
+  --red:#d62828;
+  --red-dark:#8e1515;
+  --red-light:#ff4545;
+  --green:#159447;
+
+  --panel:rgba(28,28,28,.72);
+  --panel-strong:rgba(24,24,24,.84);
+
   --text:#fff;
-  --muted:#cfcfcf;
-  --accent:#ffcc33;
-  --danger:#ff4d4d;
-  --ok:#50d890;
+  --muted:#d0d0d0;
+
+  --danger:#c62828;
+  --ok:#49d88b;
 }
 
 *{
   box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   margin:0;
   min-height:100%;
   font-family:Arial,Helvetica,sans-serif;
@@ -30,13 +38,14 @@ html,body{
 
 body{
   min-height:100vh;
-  background:#111;
   overflow-x:hidden;
+  background:#242424;
 }
 
-/* =========================
+
+/* =====================================================
    WALLPAPER
-   ========================= */
+   ===================================================== */
 
 .background{
   position:fixed;
@@ -53,126 +62,212 @@ body{
   position:fixed;
   inset:0;
   z-index:-2;
-  background:rgba(0,0,0,.52);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,0,0,.38),
+      rgba(20,20,20,.55)
+    );
 }
 
 .background-blur{
   position:fixed;
-  inset:-18px;
+  inset:-20px;
   z-index:-1;
-  backdrop-filter:blur(1.5px);
-  -webkit-backdrop-filter:blur(1.5px);
+
+  backdrop-filter:blur(1px);
+  -webkit-backdrop-filter:blur(1px);
+
   pointer-events:none;
 }
 
-/* =========================
+
+/* =====================================================
    APPLICATION
-   ========================= */
+   ===================================================== */
 
 .app{
   width:min(1100px,100%);
   margin:auto;
-  padding:14px 12px 30px;
+
+  padding:
+    14px
+    12px
+    30px;
 }
+
+
+/* =====================================================
+   TITRE
+   ===================================================== */
 
 header{
   text-align:center;
-  padding:8px 0 14px;
+  padding:8px 0 15px;
 }
 
 h1{
   margin:0;
-  font-size:clamp(30px,7vw,58px);
+
+  font-size:
+    clamp(32px,7vw,60px);
+
   font-weight:900;
+
   letter-spacing:1px;
+
   text-shadow:
-    0 3px 12px #000,
-    0 1px 2px #000;
+    0 4px 15px #000,
+    0 2px 3px #000;
 }
 
 .subtitle{
-  margin-top:3px;
-  color:#eee;
+  margin-top:4px;
+
+  color:#f0f0f0;
+
   font-size:13px;
-  text-shadow:0 2px 5px #000;
+
+  text-shadow:
+    0 2px 6px #000;
 }
 
-/* =========================
+
+/* =====================================================
    PANELS
-   ========================= */
+   ===================================================== */
 
 .panel{
   background:var(--panel);
-  border:1px solid rgba(255,255,255,.16);
+
+  border:
+    1px solid
+    rgba(255,255,255,.18);
+
   border-radius:18px;
-  box-shadow:0 12px 35px rgba(0,0,0,.45);
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.45);
+
   padding:14px;
 
-  backdrop-filter:blur(5px);
-  -webkit-backdrop-filter:blur(5px);
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
 }
 
-/* =========================
-   SETUP
-   ========================= */
+
+/* =====================================================
+   CONFIGURATION
+   ===================================================== */
 
 .setup-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
 
-.setup-grid .wide{
-  grid-column:1/-1;
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
 }
 
 label{
   display:block;
+
   font-size:12px;
+
   color:var(--muted);
-  margin:0 0 5px 3px;
+
+  margin:
+    0
+    0
+    5px
+    3px;
 }
 
 input,
 select,
 button{
   font:inherit;
+
   border:0;
+
   border-radius:12px;
 }
 
 input,
 select{
   width:100%;
+
   padding:12px;
-  background:rgba(255,255,255,.95);
+
+  background:
+    rgba(255,255,255,.95);
+
   color:#111;
 }
 
 button{
-  padding:12px 14px;
+  padding:
+    12px
+    14px;
+
   background:#fff;
+
   color:#111;
+
   font-weight:800;
+
   cursor:pointer;
+
   touch-action:manipulation;
+
+  transition:
+    transform .08s,
+    filter .15s;
+}
+
+button:hover{
+  filter:brightness(1.08);
 }
 
 button:active{
-  transform:scale(.98);
+  transform:scale(.97);
 }
 
+
+/* =====================================================
+   BOUTONS ROUGES
+   ===================================================== */
+
 button.primary{
-  background:var(--accent);
+  background:
+    linear-gradient(
+      135deg,
+      var(--red-light),
+      var(--red)
+    );
+
+  color:#fff;
+
+  box-shadow:
+    0 5px 16px
+    rgba(214,40,40,.3);
 }
 
 button.dark{
-  background:#292929;
+  background:#3a3a3a;
   color:#fff;
 }
 
 button.danger{
-  background:var(--danger);
+  background:
+    linear-gradient(
+      135deg,
+      #e53935,
+      #9e1b1b
+    );
+
   color:#fff;
 }
 
@@ -181,84 +276,132 @@ button.ok{
   color:#111;
 }
 
-/* =========================
+
+/* =====================================================
    JOUEURS
-   ========================= */
+   ===================================================== */
 
 .players{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
   gap:10px;
+
   margin-top:10px;
 }
 
 .player-card{
   padding:12px;
+
   border-radius:15px;
-  background:rgba(0,0,0,.48);
-  border:2px solid transparent;
+
+  background:
+    rgba(20,20,20,.68);
+
+  border:
+    2px solid
+    transparent;
+
+  box-shadow:
+    0 7px 20px
+    rgba(0,0,0,.25);
 }
 
 .player-card.active{
-  border-color:var(--accent);
-  box-shadow:0 0 20px rgba(255,204,51,.2);
+  border-color:var(--red-light);
+
+  box-shadow:
+    0 0 22px
+    rgba(214,40,40,.32);
 }
 
 .player-name{
   font-weight:900;
+
   font-size:18px;
 }
 
 .player-score{
   font-size:34px;
+
   font-weight:900;
+
   margin-top:2px;
 }
 
-/* =========================
+
+/* =====================================================
    TOUR
-   ========================= */
+   ===================================================== */
 
 .turn-info{
   text-align:center;
+
   margin:12px 0;
+
   font-weight:800;
+
+  text-shadow:
+    0 2px 5px #000;
 }
 
 .turn-info span{
-  color:var(--accent);
+  color:#ff5555;
 }
 
-/* =========================
+
+/* =====================================================
    JEU
-   ========================= */
+   ===================================================== */
 
 .game{
   display:grid;
-  grid-template-columns:minmax(300px,1fr) minmax(280px,390px);
+
+  grid-template-columns:
+    minmax(300px,1fr)
+    minmax(280px,390px);
+
   gap:14px;
+
   align-items:start;
+
   margin-top:14px;
 }
 
 .board-panel{
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
 }
 
+
+/* =====================================================
+   CIBLE
+   ===================================================== */
+
 .board-wrap{
   width:min(86vw,620px);
+
   max-width:620px;
+
   aspect-ratio:1;
 }
 
 svg{
   width:100%;
   height:100%;
+
   display:block;
 
-  filter:drop-shadow(0 12px 18px rgba(0,0,0,.55));
+  filter:
+    drop-shadow(
+      0 12px 18px
+      rgba(0,0,0,.65)
+    );
 
   touch-action:manipulation;
 }
@@ -267,15 +410,21 @@ svg{
   cursor:pointer;
 }
 
-/* =========================
-   BOUTONS
-   ========================= */
+
+/* =====================================================
+   COMMANDES
+   ===================================================== */
 
 .controls{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:9px;
+
   margin-top:12px;
+
   width:100%;
 }
 
@@ -283,27 +432,40 @@ svg{
   grid-column:1/-1;
 }
 
-/* =========================
-   DARTS DU TOUR
-   ========================= */
+
+/* =====================================================
+   DARTS
+   ===================================================== */
 
 .dart-list{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:8px;
+
   margin-top:10px;
 }
 
 .dart{
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.15);
+  background:
+    rgba(255,255,255,.09);
+
+  border:
+    1px solid
+    rgba(255,255,255,.14);
+
   border-radius:12px;
+
   padding:10px 5px;
+
   text-align:center;
 }
 
 .dart small{
   display:block;
+
   color:#aaa;
 }
 
@@ -311,59 +473,88 @@ svg{
   font-size:20px;
 }
 
-/* =========================
+
+/* =====================================================
    HISTORIQUE
-   ========================= */
+   ===================================================== */
 
 .history{
   margin-top:10px;
+
   max-height:180px;
+
   overflow:auto;
+
   font-size:13px;
 }
 
 .history-row{
   display:flex;
+
   justify-content:space-between;
+
+  gap:10px;
+
   padding:7px 3px;
-  border-bottom:1px solid rgba(255,255,255,.1);
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.1);
 }
 
-/* =========================
+
+/* =====================================================
    MESSAGE
-   ========================= */
+   ===================================================== */
 
 .message{
   margin-top:10px;
+
   padding:10px 12px;
+
   border-radius:12px;
+
   text-align:center;
-  background:rgba(255,255,255,.08);
+
+  background:
+    rgba(255,255,255,.08);
+
   font-weight:800;
+
   min-height:40px;
 }
 
 .small-actions{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:9px;
+
   margin-top:10px;
 }
 
-/* =========================
-   FENÊTRE VICTOIRE
-   ========================= */
+
+/* =====================================================
+   VICTOIRE
+   ===================================================== */
 
 .modal{
   position:fixed;
+
   inset:0;
-  background:rgba(0,0,0,.72);
+
+  background:
+    rgba(0,0,0,.72);
 
   display:none;
+
   align-items:center;
   justify-content:center;
 
   padding:18px;
+
   z-index:20;
 }
 
@@ -373,17 +564,31 @@ svg{
 
 .modal-box{
   width:min(420px,100%);
-  background:#171717;
-  border:1px solid #444;
+
+  background:
+    rgba(30,30,30,.96);
+
+  border:
+    1px solid
+    #555;
+
   border-radius:20px;
+
   padding:22px;
+
   text-align:center;
 
-  box-shadow:0 20px 60px #000;
+  box-shadow:
+    0 20px 60px
+    #000;
 }
 
 .modal-box h2{
-  margin:0 0 8px;
+  margin:
+    0
+    0
+    8px;
+
   font-size:30px;
 }
 
@@ -393,24 +598,32 @@ svg{
 
 .modal-box button{
   width:100%;
+
   margin-top:8px;
 }
 
-/* =========================
+
+/* =====================================================
    FOOTER
-   ========================= */
+   ===================================================== */
 
 footer{
   text-align:center;
+
   color:#ddd;
+
   font-size:11px;
+
   margin-top:12px;
-  text-shadow:0 2px 5px #000;
+
+  text-shadow:
+    0 2px 5px #000;
 }
 
-/* =========================
+
+/* =====================================================
    MOBILE
-   ========================= */
+   ===================================================== */
 
 @media(max-width:760px){
 
@@ -427,22 +640,23 @@ footer{
   }
 }
 
+
 @media(max-width:430px){
 
   .app{
-    padding:8px 8px 22px;
+    padding:
+      8px
+      8px
+      22px;
   }
 
   .setup-grid{
     grid-template-columns:1fr;
   }
 
-  .setup-grid .wide{
-    grid-column:auto;
-  }
-
   .players{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
   }
 
   .player-name{
@@ -452,22 +666,41 @@ footer{
   .player-score{
     font-size:28px;
   }
+
+  h1{
+    font-size:36px;
+  }
 }
 </style>
 </head>
 
+
 <body>
 
-<!-- WALLPAPER -->
+
+<!-- =====================================================
+     FOND
+     ===================================================== -->
+
 <div class="background"></div>
+
 <div class="background-overlay"></div>
+
 <div class="background-blur"></div>
+
 
 <div class="app">
 
+
+<!-- =====================================================
+     TITRE
+     ===================================================== -->
+
 <header>
 
-  <h1>Gambard Darts</h1>
+  <h1>
+    Gambard Darts 🎯
+  </h1>
 
   <div class="subtitle">
     Compteur de fléchettes • 301 / 501 / 701
@@ -476,33 +709,42 @@ footer{
 </header>
 
 
-<!-- =========================
+<!-- =====================================================
      CONFIGURATION
-     ========================= -->
+     ===================================================== -->
 
-<section class="panel" id="setup">
+<section class="panel">
 
   <div class="setup-grid">
 
+
     <div>
-      <label for="p1">Joueur 1</label>
+
+      <label for="p1">
+        Joueur 1
+      </label>
 
       <input
         id="p1"
         value="Joueur 1"
         maxlength="18"
       >
+
     </div>
 
 
     <div>
-      <label for="p2">Joueur 2</label>
+
+      <label for="p2">
+        Joueur 2
+      </label>
 
       <input
         id="p2"
         value="Joueur 2"
         maxlength="18"
       >
+
     </div>
 
 
@@ -531,7 +773,12 @@ footer{
     </div>
 
 
-    <div style="display:flex;align-items:end">
+    <div
+      style="
+        display:flex;
+        align-items:end
+      "
+    >
 
       <button
         class="primary"
@@ -548,9 +795,9 @@ footer{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      JOUEURS
-     ========================= -->
+     ===================================================== -->
 
 <section
   class="players"
@@ -558,9 +805,14 @@ footer{
 </section>
 
 
+<!-- =====================================================
+     TOUR
+     ===================================================== -->
+
 <div class="turn-info">
 
   Tour de
+
   <span id="activeName">
     Joueur 1
   </span>
@@ -576,147 +828,174 @@ footer{
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      JEU
-     ========================= -->
+     ===================================================== -->
 
 <section class="game">
 
 
-  <!-- TABLEAU -->
+<!-- =====================================================
+     CIBLE
+     ===================================================== -->
 
-  <div class="panel board-panel">
+<div class="panel board-panel">
 
-    <div class="board-wrap">
+  <div class="board-wrap">
 
-      <svg
-        id="board"
-        viewBox="-30 -30 560 560"
-        aria-label="Cible de fléchettes">
-      </svg>
+    <!--
+      IMPORTANT :
+      viewBox corrigé.
+      La cible est maintenant parfaitement centrée.
+    -->
 
-    </div>
-
-
-    <div class="controls">
-
-      <button
-        class="dark"
-        onclick="addMiss()">
-        MISS / 0
-      </button>
-
-      <button
-        class="danger"
-        onclick="bust()">
-        BUST
-      </button>
-
-      <button
-        class="dark"
-        onclick="undo()">
-        ↶ Annuler
-      </button>
-
-    </div>
+    <svg
+      id="board"
+      viewBox="-285 -285 570 570"
+      aria-label="Cible de fléchettes">
+    </svg>
 
   </div>
 
 
-  <!-- PANNEAU DROIT -->
+  <div class="controls">
 
-  <aside class="panel">
-
-    <div
-      style="
-        font-weight:900;
-        font-size:20px
-      ">
-      Tour en cours
-    </div>
+    <button
+      class="dark"
+      onclick="addMiss()"
+    >
+      MISS / 0
+    </button>
 
 
-    <div
-      class="dart-list"
-      id="dartList">
-    </div>
+    <button
+      class="danger"
+      onclick="bust()"
+    >
+      BUST
+    </button>
 
 
-    <div
-      class="message"
-      id="message">
-      Clique sur une zone de la cible.
-    </div>
+    <button
+      class="dark"
+      onclick="undo()"
+    >
+      ↶ Annuler
+    </button>
+
+  </div>
+
+</div>
 
 
-    <div class="small-actions">
+<!-- =====================================================
+     PANNEAU DROIT
+     ===================================================== -->
 
-      <button
-        class="ok"
-        onclick="endTurn()">
-        Fin du tour
-      </button>
+<aside class="panel">
 
-      <button
-        class="dark"
-        onclick="newGame()">
-        Recommencer
-      </button>
-
-    </div>
-
-
-    <div
-      style="
-        font-weight:900;
-        margin-top:14px
-      ">
-      Historique
-    </div>
+  <div
+    style="
+      font-weight:900;
+      font-size:20px
+    "
+  >
+    Tour en cours
+  </div>
 
 
-    <div
-      class="history"
-      id="history">
-    </div>
+  <div
+    class="dart-list"
+    id="dartList">
+  </div>
 
-  </aside>
+
+  <div
+    class="message"
+    id="message"
+  >
+    Clique sur une zone de la cible.
+  </div>
+
+
+  <div class="small-actions">
+
+    <button
+      class="ok"
+      onclick="endTurn()"
+    >
+      Fin du tour
+    </button>
+
+
+    <button
+      class="dark"
+      onclick="newGame()"
+    >
+      Recommencer
+    </button>
+
+  </div>
+
+
+  <div
+    style="
+      font-weight:900;
+      margin-top:14px
+    "
+  >
+    Historique
+  </div>
+
+
+  <div
+    class="history"
+    id="history"
+  >
+  </div>
+
+</aside>
 
 </section>
 
 
 <footer>
-  Gambard Darts — BUST = retour au score du début du tour.
+  Gambard Darts 🎯 — BUST = retour au score du début du tour.
 </footer>
 
 </div>
 
 
-<!-- =========================
-     VICTOIRE
-     ========================= -->
+<!-- =====================================================
+     FENÊTRE VICTOIRE
+     ===================================================== -->
 
 <div
   class="modal"
-  id="winModal">
+  id="winModal"
+>
 
   <div class="modal-box">
 
     <h2>
-      🎯 Victoire !
+      Victoire ! 🎯
     </h2>
 
     <p id="winnerText"></p>
 
+
     <button
       class="primary"
-      onclick="closeWin();newGame()">
+      onclick="closeWin();newGame()"
+    >
       Nouvelle partie
     </button>
 
+
     <button
       class="dark"
-      onclick="closeWin()">
+      onclick="closeWin()"
+    >
       Fermer
     </button>
 
@@ -728,48 +1007,55 @@ footer{
 <script>
 
 /* =====================================================
-   ORDRE TRADITIONNEL DES NUMÉROS
+   ORDRE TRADITIONNEL
    ===================================================== */
 
 const nums = [
+
   20,1,18,4,13,
+
   6,10,15,2,17,
+
   3,19,7,16,8,
+
   11,14,9,12,5
+
 ];
 
 
-/* Namespace SVG */
+/* =====================================================
+   SVG
+   ===================================================== */
 
 const NS =
   "http://www.w3.org/2000/svg";
 
 
 /* =====================================================
-   ÉTAT DE LA PARTIE
+   ÉTAT DU JEU
    ===================================================== */
 
 let state = {
 
-  players: [],
+  players:[],
 
-  active: 0,
+  active:0,
 
-  startScore: 501,
+  startScore:501,
 
-  turnStartScore: 501,
+  turnStartScore:501,
 
-  darts: [],
+  darts:[],
 
-  history: [],
+  history:[],
 
-  gameOver: false
+  gameOver:false
 
 };
 
 
 /* =====================================================
-   RACCOURCI ELEMENT
+   ELEMENT
    ===================================================== */
 
 function el(id){
@@ -780,46 +1066,29 @@ function el(id){
 
 
 /* =====================================================
-   COORDONNÉES POLAIRES
+   COORDONNÉES
    ===================================================== */
 
 function polar(r,a){
 
   const rad =
-    (a - 90) *
+    (a-90) *
     Math.PI /
     180;
 
   return [
+
     r * Math.cos(rad),
+
     r * Math.sin(rad)
+
   ];
 
 }
 
 
 /* =====================================================
-   POINTS
-   ===================================================== */
-
-function pts(r,a1,a2){
-
-  const p1 =
-    polar(r,a1);
-
-  const p2 =
-    polar(r,a2);
-
-  return `
-    ${p1[0]},${p1[1]}
-    ${p2[0]},${p2[1]}
-  `;
-
-}
-
-
-/* =====================================================
-   SECTEUR SVG
+   SECTEUR
    ===================================================== */
 
 function sectorPath(
@@ -842,9 +1111,12 @@ function sectorPath(
     polar(r2,a1);
 
   const large =
-    (a2-a1)>180 ? 1 : 0;
+    (a2-a1)>180
+      ? 1
+      : 0;
 
   return `
+
     M ${p1[0]} ${p1[1]}
 
     L ${p3[0]} ${p3[1]}
@@ -860,13 +1132,14 @@ function sectorPath(
       ${p1[0]} ${p1[1]}
 
     Z
+
   `;
 
 }
 
 
 /* =====================================================
-   CREATION SVG
+   CRÉATION SVG
    ===================================================== */
 
 function svgEl(
@@ -881,11 +1154,10 @@ function svgEl(
     );
 
   Object.entries(attrs)
-    .forEach(([k,v]) => {
-
-      x.setAttribute(k,v);
-
-    });
+    .forEach(
+      ([k,v]) =>
+        x.setAttribute(k,v)
+    );
 
   return x;
 
@@ -893,7 +1165,7 @@ function svgEl(
 
 
 /* =====================================================
-   DESSIN DU TABLEAU
+   DESSIN CIBLE
    ===================================================== */
 
 function drawBoard(){
@@ -904,7 +1176,9 @@ function drawBoard(){
   svg.innerHTML="";
 
 
-  /* Cercle extérieur */
+  /* ================================================
+     FOND EXTÉRIEUR
+     ================================================ */
 
   svg.appendChild(
     svgEl(
@@ -914,16 +1188,16 @@ function drawBoard(){
         cy:0,
         r:270,
         fill:"#111",
-        stroke:"#ddd",
+        stroke:"#aaa",
         "stroke-width":5
       }
     )
   );
 
 
-  /* =================================================
+  /* ================================================
      SECTEURS
-     ================================================= */
+     ================================================ */
 
   for(
     let i=0;
@@ -940,88 +1214,72 @@ function drawBoard(){
     const n =
       nums[i];
 
+
     const group =
       svgEl(
         "g",
         {
-          "data-n":n,
-          class:"board-hit"
+          "data-n":n
         }
       );
 
 
-    /* Zone simple extérieure */
+    /*
+      COULEURS TRADITIONNELLES
+    */
 
-    const fill =
+    const dark =
       i%2===0
       ? "#151515"
-      : "#e8e0cf";
+      : "#e8dfca";
 
 
-    group.appendChild(
+    const red =
+      i%2===0
+      ? "#c62828"
+      : "#159447";
+
+
+    /* ==========================================
+       ZONE SIMPLE INTÉRIEURE
+       ========================================== */
+
+    const singleInner =
       svgEl(
         "path",
         {
           d:sectorPath(
             48,
-            212,
+            82,
             a1,
             a2
           ),
-          fill:fill,
-          stroke:"#333",
+          fill:dark,
+          stroke:"#444",
           "stroke-width":1
         }
-      )
+      );
+
+
+    singleInner.addEventListener(
+      "click",
+      e=>{
+        e.stopPropagation();
+        score(n,1,"Simple");
+      }
     );
 
 
-    /* Double */
-
     group.appendChild(
-      svgEl(
-        "path",
-        {
-          d:sectorPath(
-            212,
-            232,
-            a1,
-            a2
-          ),
-          fill:
-            i%2===0
-            ? "#c62828"
-            : "#1e9d48",
-          stroke:"#111",
-          "stroke-width":2
-        }
-      )
+      singleInner
     );
 
 
-    /* Bord extérieur */
+    /* ==========================================
+       TRIPLE
+       ========================================== */
 
-    group.appendChild(
-      svgEl(
-        "path",
-        {
-          d:sectorPath(
-            232,
-            255,
-            a1,
-            a2
-          ),
-          fill:fill,
-          stroke:"#111",
-          "stroke-width":2
-        }
-      )
-    );
-
-
-    /* Triple */
-
-    group.appendChild(
+    const triple =
       svgEl(
         "path",
         {
@@ -1031,20 +1289,32 @@ function drawBoard(){
             a1,
             a2
           ),
-          fill:
-            i%2===0
-            ? "#c62828"
-            : "#1e9d48",
+          fill:red,
           stroke:"#111",
           "stroke-width":2
         }
-      )
+      );
+
+
+    triple.addEventListener(
+      "click",
+      e=>{
+        e.stopPropagation();
+        score(n,3,"Triple");
+      }
     );
 
 
-    /* Zone simple intérieure */
-
     group.appendChild(
+      triple
+    );
+
+
+    /* ==========================================
+       ZONE SIMPLE EXTÉRIEURE
+       ========================================== */
+
+    const singleOuter =
       svgEl(
         "path",
         {
@@ -1054,30 +1324,107 @@ function drawBoard(){
             a1,
             a2
           ),
-          fill:fill,
-          stroke:"#333",
+          fill:dark,
+          stroke:"#444",
           "stroke-width":1
         }
-      )
-    );
+      );
 
 
-    /* Clic */
-
-    group.addEventListener(
+    singleOuter.addEventListener(
       "click",
-      () => score(n,1)
+      e=>{
+        e.stopPropagation();
+        score(n,1,"Simple");
+      }
     );
 
 
-    svg.appendChild(group);
+    group.appendChild(
+      singleOuter
+    );
+
+
+    /* ==========================================
+       DOUBLE
+       ========================================== */
+
+    const double =
+      svgEl(
+        "path",
+        {
+          d:sectorPath(
+            212,
+            232,
+            a1,
+            a2
+          ),
+          fill:red,
+          stroke:"#111",
+          "stroke-width":2
+        }
+      );
+
+
+    double.addEventListener(
+      "click",
+      e=>{
+        e.stopPropagation();
+        score(n,2,"Double");
+      }
+    );
+
+
+    group.appendChild(
+      double
+    );
+
+
+    /* ==========================================
+       COURONNE EXTÉRIEURE
+       ========================================== */
+
+    const outer =
+      svgEl(
+        "path",
+        {
+          d:sectorPath(
+            232,
+            255,
+            a1,
+            a2
+          ),
+          fill:dark,
+          stroke:"#111",
+          "stroke-width":2
+        }
+      );
+
+
+    outer.addEventListener(
+      "click",
+      e=>{
+        e.stopPropagation();
+        score(n,1,"Simple");
+      }
+    );
+
+
+    group.appendChild(
+      outer
+    );
+
+
+    svg.appendChild(
+      group
+    );
 
   }
 
 
-  /* =================================================
-     ANNEAUX
-     ================================================= */
+  /* ================================================
+     FILS / ANNEAUX
+     ================================================ */
 
   [
     48,
@@ -1097,7 +1444,8 @@ function drawBoard(){
           r:r,
           fill:"none",
           stroke:"#777",
-          "stroke-width":2
+          "stroke-width":2,
+          "pointer-events":"none"
         }
       )
     );
@@ -1105,87 +1453,9 @@ function drawBoard(){
   });
 
 
-  /* =================================================
-     BULL
-     ================================================= */
-
-  const bull =
-    svgEl(
-      "g",
-      {
-        class:"board-hit"
-      }
-    );
-
-
-  bull.appendChild(
-    svgEl(
-      "circle",
-      {
-        cx:0,
-        cy:0,
-        r:48,
-        fill:"#188c43",
-        stroke:"#111",
-        "stroke-width":2
-      }
-    )
-  );
-
-
-  bull.appendChild(
-    svgEl(
-      "circle",
-      {
-        cx:0,
-        cy:0,
-        r:20,
-        fill:"#c62828",
-        stroke:"#111",
-        "stroke-width":2
-      }
-    )
-  );
-
-
-  bull.addEventListener(
-    "click",
-    () => score(25,1)
-  );
-
-
-  svg.appendChild(bull);
-
-
-  /* Bullseye = 50 */
-
-  const bullseye =
-    svgEl(
-      "circle",
-      {
-        cx:0,
-        cy:0,
-        r:20,
-        fill:"transparent",
-        class:"board-hit"
-      }
-    );
-
-
-  bullseye.addEventListener(
-    "click",
-    () => score(50,1)
-  );
-
-
-  svg.appendChild(
-    bullseye
-  );
-
-
-  /* =================================================
-     FILS / SEPARATIONS
-     ================================================= */
+  /* ================================================
+     SÉPARATIONS
+     ================================================ */
 
   for(
     let i=0;
@@ -1196,11 +1466,13 @@ function drawBoard(){
     const a =
       i*18 - 9;
 
+
     const p1 =
       polar(48,a);
 
     const p2 =
       polar(255,a);
+
 
     svg.appendChild(
       svgEl(
@@ -1211,7 +1483,8 @@ function drawBoard(){
           x2:p2[0],
           y2:p2[1],
           stroke:"#555",
-          "stroke-width":1
+          "stroke-width":1,
+          "pointer-events":"none"
         }
       )
     );
@@ -1219,9 +1492,73 @@ function drawBoard(){
   }
 
 
-  /* =================================================
+  /* ================================================
+     BULL 25
+     ================================================ */
+
+  const bull =
+    svgEl(
+      "circle",
+      {
+        cx:0,
+        cy:0,
+        r:48,
+        fill:"#159447",
+        stroke:"#111",
+        "stroke-width":2
+      }
+    );
+
+
+  bull.addEventListener(
+    "click",
+    e=>{
+      e.stopPropagation();
+      score(25,1,"Bull");
+    }
+  );
+
+
+  svg.appendChild(
+    bull
+  );
+
+
+  /* ================================================
+     BULLSEYE 50
+     ================================================ */
+
+  const bullseye =
+    svgEl(
+      "circle",
+      {
+        cx:0,
+        cy:0,
+        r:20,
+        fill:"#c62828",
+        stroke:"#111",
+        "stroke-width":2
+      }
+    );
+
+
+  bullseye.addEventListener(
+    "click",
+    e=>{
+      e.stopPropagation();
+      score(50,1,"Bullseye");
+    }
+  );
+
+
+  svg.appendChild(
+    bullseye
+  );
+
+
+  /* ================================================
      NUMÉROS
-     ================================================= */
+     ================================================ */
 
   for(
     let i=0;
@@ -1231,6 +1568,7 @@ function drawBoard(){
 
     const a =
       i*18;
+
 
     const p =
       polar(270,a);
@@ -1242,13 +1580,25 @@ function drawBoard(){
         {
           x:p[0],
           y:p[1]+8,
-          "text-anchor":"middle",
+
+          "text-anchor":
+            "middle",
+
           fill:"#fff",
+
           "font-size":"22",
+
           "font-weight":"900",
-          "paint-order":"stroke",
+
+          "paint-order":
+            "stroke",
+
           stroke:"#000",
-          "stroke-width":"4"
+
+          "stroke-width":"4",
+
+          "pointer-events":
+            "none"
         }
       );
 
@@ -1274,14 +1624,16 @@ function newGame(){
     el("p1")
       .value
       .trim()
-    || "Joueur 1";
+    ||
+    "Joueur 1";
 
 
   const n2 =
     el("p2")
       .value
       .trim()
-    || "Joueur 2";
+    ||
+    "Joueur 2";
 
 
   const start =
@@ -1290,17 +1642,20 @@ function newGame(){
     );
 
 
-  state = {
+  state={
 
     players:[
+
       {
         name:n1,
         score:start
       },
+
       {
         name:n2,
         score:start
       }
+
     ],
 
     active:0,
@@ -1318,6 +1673,11 @@ function newGame(){
   };
 
 
+  el("message")
+    .textContent =
+      "Clique sur une zone de la cible.";
+
+
   render();
 
 }
@@ -1330,16 +1690,21 @@ function newGame(){
 function render(){
 
   el("players").innerHTML =
+
     state.players
       .map(
         (p,i)=>`
 
-          <div class="player-card
-            ${i===state.active &&
-              !state.gameOver
-              ? "active"
-              : ""}
-          ">
+          <div
+            class="player-card
+              ${
+                i===state.active &&
+                !state.gameOver
+                ? "active"
+                : ""
+              }
+            "
+          >
 
             <div class="player-name">
               ${escapeHtml(p.name)}
@@ -1371,9 +1736,16 @@ function render(){
       );
 
 
-  if(state.darts.length){
+  /* ==========================================
+     DARTS DU TOUR
+     ========================================== */
+
+  if(
+    state.darts.length
+  ){
 
     el("dartList").innerHTML =
+
       state.darts
         .map(
           (d,i)=>`
@@ -1400,7 +1772,8 @@ function render(){
 
       <div
         class="dart"
-        style="grid-column:1/-1">
+        style="grid-column:1/-1"
+      >
 
         <small>
           Prêt
@@ -1417,9 +1790,16 @@ function render(){
   }
 
 
-  if(state.history.length){
+  /* ==========================================
+     HISTORIQUE
+     ========================================== */
+
+  if(
+    state.history.length
+  ){
 
     el("history").innerHTML =
+
       state.history
         .slice()
         .reverse()
@@ -1445,13 +1825,16 @@ function render(){
   }else{
 
     el("history").innerHTML = `
+
       <div
         style="
           color:#aaa;
           padding:8px 0
-        ">
+        "
+      >
         Aucun tour joué.
       </div>
+
     `;
 
   }
@@ -1468,12 +1851,14 @@ function escapeHtml(s){
   return String(s)
     .replace(
       /[&<>"']/g,
-      c => ({
+      c=>({
+
         '&':'&amp;',
         '<':'&lt;',
         '>':'&gt;',
         '"':'&quot;',
         "'":'&#039;'
+
       }[c])
     );
 
@@ -1486,14 +1871,17 @@ function escapeHtml(s){
 
 function score(
   base,
-  mult
+  mult,
+  type
 ){
 
   if(
     state.gameOver ||
     state.darts.length>=3
   ){
+
     return;
+
   }
 
 
@@ -1511,23 +1899,23 @@ function score(
     p.score - value;
 
 
-  /*
-   ================================================
-   RÈGLE BUST DEMANDÉE
+  /* ==========================================
+     BUST
 
-   Bust uniquement si le score passe SOUS 0.
+     Uniquement si score < 0.
 
-   Donc :
+     Exemple :
 
-   16 - 8 = 8  → VALIDE
-   1 - 1 = 0   → VICTOIRE
-   1 - 2 = -1  → BUST
+     16 - 8 = 8  → OK
 
-   Pas de règle du double-out.
-   ================================================
-  */
+     1 - 1 = 0   → VICTOIRE
 
-  if(newScore < 0){
+     1 - 2 = -1  → BUST
+     ========================================== */
+
+  if(
+    newScore < 0
+  ){
 
     bust();
 
@@ -1543,12 +1931,12 @@ function score(
   let label;
 
 
-  if(base===50){
+  if(type==="Bullseye"){
 
     label =
-      "Bull 50";
+      "Bullseye 50";
 
-  }else if(base===25){
+  }else if(type==="Bull"){
 
     label =
       "Bull 25";
@@ -1556,9 +1944,9 @@ function score(
   }else{
 
     label =
-      mult>1
-      ? mult+"×"+base
-      : String(base);
+      type +
+      " " +
+      base;
 
   }
 
@@ -1572,18 +1960,20 @@ function score(
   });
 
 
-  el("message").textContent =
-    `${label} → reste ${newScore}`;
+  el("message")
+    .textContent =
+      `${label} → reste ${newScore}`;
 
 
-  /* =========================
+  /* ==========================================
      VICTOIRE
-     ========================= */
+     ========================================== */
 
-  if(newScore===0){
+  if(
+    newScore===0
+  ){
 
-    state.gameOver =
-      true;
+    state.gameOver=true;
 
 
     state.history.push({
@@ -1617,9 +2007,9 @@ function score(
   }
 
 
-  /* =========================
+  /* ==========================================
      3 FLÉCHETTES
-     ========================= */
+     ========================================== */
 
   if(
     state.darts.length===3
@@ -1660,8 +2050,9 @@ function addMiss(){
   });
 
 
-  el("message").textContent =
-    "MISS → 0 point";
+  el("message")
+    .textContent =
+      "MISS → 0 point";
 
 
   if(
@@ -1684,7 +2075,9 @@ function addMiss(){
 
 function bust(){
 
-  if(state.gameOver){
+  if(
+    state.gameOver
+  ){
 
     return;
 
@@ -1697,10 +2090,7 @@ function bust(){
     ];
 
 
-  /*
-   Retour au score du début
-   du tour.
-  */
+  /* Retour au score du début du tour */
 
   p.score =
     state.turnStartScore;
@@ -1719,8 +2109,9 @@ function bust(){
   state.darts=[];
 
 
-  el("message").textContent =
-    `BUST ! Score restauré à ${p.score}`;
+  el("message")
+    .textContent =
+      `BUST ! Score restauré à ${p.score}`;
 
 
   switchPlayer();
@@ -1729,12 +2120,14 @@ function bust(){
 
 
 /* =====================================================
-   FIN DE TOUR
+   FIN DU TOUR
    ===================================================== */
 
 function endTurn(auto=false){
 
-  if(state.gameOver){
+  if(
+    state.gameOver
+  ){
 
     return;
 
@@ -1793,7 +2186,9 @@ function endTurn(auto=false){
 function switchPlayer(){
 
   state.active =
-    (state.active+1)
+    (
+      state.active + 1
+    )
     %
     state.players.length;
 
@@ -1807,18 +2202,19 @@ function switchPlayer(){
   render();
 
 
-  el("message").textContent =
-    `Tour de ${
-      state.players[
-        state.active
-      ].name
-    }`;
+  el("message")
+    .textContent =
+      `Tour de ${
+        state.players[
+          state.active
+        ].name
+      }`;
 
 }
 
 
 /* =====================================================
-   ANNULER LA DERNIÈRE FLÉCHETTE
+   ANNULER
    ===================================================== */
 
 function undo(){
@@ -1843,8 +2239,9 @@ function undo(){
     d.value;
 
 
-  el("message").textContent =
-    `Annulé : ${d.label}`;
+  el("message")
+    .textContent =
+      `Annulé : ${d.label}`;
 
 
   render();

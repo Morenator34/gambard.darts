@@ -8,7 +8,7 @@
   content="width=device-width, initial-scale=1, viewport-fit=cover"
 >
 
-<meta name="theme-color" content="#b71c1c">
+<meta name="theme-color" content="#c62828">
 
 <title>Gambard Darts 🎯</title>
 
@@ -22,16 +22,11 @@
   --red:#d62828;
   --red-dark:#941818;
   --red-light:#ff4b4b;
-
   --green:#159447;
-
   --cream:#e8dfca;
-
   --panel:rgba(35,35,35,.76);
-
   --text:#fff;
   --muted:#d0d0d0;
-
   --ok:#49d88b;
 }
 
@@ -73,8 +68,7 @@ body{
   inset:0;
   z-index:-3;
 
-  background-image:
-    url("wallpaper.jpg.jpeg");
+  background-image:url("wallpaper.jpg.jpeg");
 
   background-size:cover;
   background-position:center center;
@@ -355,7 +349,7 @@ button.ok{
 
 
 /* =====================================================
-   INFORMATIONS TOUR
+   TOUR
 ===================================================== */
 
 .turn-info{
@@ -587,7 +581,7 @@ svg{
 }
 
 .modal-box{
-  width:min(420px,100%);
+  width:min(500px,100%);
 
   background:
     rgba(30,30,30,.97);
@@ -598,7 +592,7 @@ svg{
 
   border-radius:20px;
 
-  padding:22px;
+  padding:24px;
 
   text-align:center;
 
@@ -611,13 +605,25 @@ svg{
   margin:
     0
     0
-    8px;
+    12px;
 
   font-size:30px;
 }
 
-.modal-box p{
-  color:#ddd;
+#winnerText{
+  color:#fff;
+
+  font-size:
+    clamp(20px,4vw,27px);
+
+  line-height:1.35;
+
+  font-weight:900;
+
+  margin:
+    10px
+    0
+    18px;
 }
 
 .modal-box button{
@@ -689,6 +695,14 @@ footer{
   h1{
     font-size:36px;
   }
+
+  .modal-box{
+    padding:20px 16px;
+  }
+
+  #winnerText{
+    font-size:21px;
+  }
 }
 
 </style>
@@ -703,9 +717,7 @@ footer{
 ===================================================== -->
 
 <div class="background"></div>
-
 <div class="background-overlay"></div>
-
 <div class="background-blur"></div>
 
 
@@ -983,7 +995,7 @@ footer{
 
 
 <!-- =====================================================
-     VICTOIRE
+     FENÊTRE VICTOIRE
 ===================================================== -->
 
 <div
@@ -994,7 +1006,7 @@ footer{
   <div class="modal-box">
 
     <h2>
-      Victoire ! 🎯
+      🎯 VICTOIRE !
     </h2>
 
     <p id="winnerText"></p>
@@ -1024,7 +1036,7 @@ footer{
 
 
 /* =====================================================
-   ORDRE TRADITIONNEL
+   ORDRE TRADITIONNEL DE LA CIBLE
 ===================================================== */
 
 const nums = [
@@ -1042,7 +1054,76 @@ const NS =
 
 
 /* =====================================================
-   ÉTAT
+   PHRASES DE VICTOIRE
+===================================================== */
+
+const victoryMessages = [
+
+  "👨🏻‍🏫 {winner} vient d’apprendre le jeu à {loser} !",
+
+  "🔥 Quel finish, victoire de {winner} !",
+
+  "🎯 Dans le mille, c’est gagné pour {winner} !",
+
+  "😎 Tout en maîtrise pour {winner} qui s’impose sans trembler !",
+
+  "💸 Désolé {loser} mais le haut niveau, ça paye cash !",
+
+  "🏆 Le patron a encore frappé, bravo {winner} !",
+
+  "🤷‍♂️ Why always {winner} ?",
+
+  "📐 {loser}, la cible c'est le rond au milieu, pas le mur derrière !",
+
+  "🐐 Le GOAT, c’est {winner} !",
+
+  "😂 {loser}, tu croyais vraiment pouvoir gagner ?",
+
+  "⚡️ Précision et habileté, c’est signé {winner} !",
+
+  "🥶 Quel sang froid de la part de {winner} !",
+
+  "💼 Une journée classique au boulot pour {winner} !",
+
+  "👓 {loser}, un rdv chez l'ophtalmo est déjà réservé !",
+
+  "🧱 {winner} a fini la partie, {loser} cherche encore ses fléchettes dans le placo !",
+
+  "🙈 {winner} a gagné en fermant les yeux, quelle est ton excuse {loser} ?",
+
+  "🎯 {winner} joue aux fléchettes, {loser} fait de la peinture sur le mur !",
+
+  "🫪 On dirait que {loser} n’a pas les yeux en face des trous !",
+
+  "🤮 Un niveau de jeu pareil {loser}, ça devrait être interdit par la loi…",
+
+  "🤡 {loser}, range tes fléchettes et va acheter des boules de pétanque !",
+
+  "👆 C’est pas grave {loser}, vaut mieux perdre 1 fois 301-0 que 301 fois 1-0",
+
+  "🪦 {loser} est venu, a vu, et s'est fait piétiner sans l'ombre d'un respect !",
+
+  "🩸 {winner} vient de massacrer {loser}, ramassez les morceaux !",
+
+  "❌ Ce que vient de faire {loser}, c’est tout ce qu’on ne veut pas voir dans le monde des fléchettes !",
+
+  "🚀 Thomas Pesquet vient de recevoir les fléchettes de {loser} !",
+
+  "🧑🏻‍🦯‍➡️ Belle victoire de {winner} face à Gilbert Montagné !",
+
+  "🏝️ {loser}, les autres joueurs ont décidé de t'éliminer, et leur sentence est irrévocable…",
+
+  "🥊 {winner} a mis K.O. {loser} !",
+
+  "Allez à la niche {loser} !",
+
+  "👶🏼 Désolé {loser} mais même Noé aurait fait un meilleur score que toi !"
+
+];
+
+
+/* =====================================================
+   ÉTAT DU JEU
 ===================================================== */
 
 let state = {
@@ -1076,7 +1157,7 @@ function el(id){
 
 
 /* =====================================================
-   POLAIRE
+   COORDONNÉES POLAIRES
 ===================================================== */
 
 function polar(r,angle){
@@ -1098,7 +1179,7 @@ function polar(r,angle){
 
 
 /* =====================================================
-   SECTEUR
+   CRÉATION D'UN SECTEUR
 ===================================================== */
 
 function sectorPath(
@@ -1153,7 +1234,7 @@ function sectorPath(
 
 
 /* =====================================================
-   ELEMENT SVG
+   ÉLÉMENT SVG
 ===================================================== */
 
 function svgEl(
@@ -1194,7 +1275,7 @@ function drawBoard(){
 
 
   /* ===================================================
-     FOND EXTÉRIEUR
+     CERCLE EXTÉRIEUR
   =================================================== */
 
   svg.appendChild(
@@ -1214,24 +1295,18 @@ function drawBoard(){
   );
 
 
-  /* ===================================================
-     DIMENSIONS DE LA CIBLE
+  /*
+     DIMENSIONS :
 
-     Bullseye : 0 → 16
-     Bull     : 16 → 32
+     Bullseye       0 → 16
+     Bull           16 → 32
+     Simple         32 → 96
+     TRIPLE         96 → 116
+     Simple         116 → 218
+     DOUBLE         218 → 248
+     Bord            248 → 255
+  */
 
-     Simple intérieur : 32 → 96
-
-     TRIPLE : 96 → 116
-     (plus large qu'avant)
-
-     Simple extérieur : 116 → 218
-
-     DOUBLE : 218 → 248
-     (plus large + beaucoup plus proche du bord)
-
-     Bord extérieur : 248 → 255
-  =================================================== */
 
   for(
     let i=0;
@@ -1314,8 +1389,7 @@ function drawBoard(){
 
 
     /* =================================================
-       TRIPLE
-       96 → 116
+       TRIPLE — AGRANDI
     ================================================= */
 
     const triple =
@@ -1365,7 +1439,6 @@ function drawBoard(){
 
     /* =================================================
        SIMPLE EXTÉRIEUR
-       116 → 218
     ================================================= */
 
     const simpleOuter =
@@ -1414,11 +1487,7 @@ function drawBoard(){
 
 
     /* =================================================
-       DOUBLE
-       218 → 248
-
-       Beaucoup plus large qu'avant.
-       Il arrive presque au bord extérieur.
+       DOUBLE — AGRANDI
     ================================================= */
 
     const double =
@@ -1467,8 +1536,7 @@ function drawBoard(){
 
 
     /* =================================================
-       ZONE EXTÉRIEURE
-       248 → 255
+       BORD EXTÉRIEUR
     ================================================= */
 
     const outer =
@@ -1558,7 +1626,7 @@ function drawBoard(){
 
 
   /* ===================================================
-     LIGNES DE SÉPARATION
+     LIGNES
   =================================================== */
 
   for(
@@ -1610,7 +1678,7 @@ function drawBoard(){
 
 
   /* ===================================================
-     BULL 25
+     BULL
   =================================================== */
 
   const bull =
@@ -1654,7 +1722,7 @@ function drawBoard(){
 
 
   /* ===================================================
-     BULLSEYE 50
+     BULLSEYE
   =================================================== */
 
   const bullseye =
@@ -1785,8 +1853,7 @@ function newGame(){
 
   const start =
     Number(
-      el("startScore")
-        .value
+      el("startScore").value
     );
 
 
@@ -2043,6 +2110,39 @@ function escapeHtml(value){
 
 
 /* =====================================================
+   MESSAGE DE VICTOIRE ALÉATOIRE
+===================================================== */
+
+function getVictoryMessage(
+  winner,
+  loser
+){
+
+  const randomIndex =
+    Math.floor(
+      Math.random() *
+      victoryMessages.length
+    );
+
+
+  return victoryMessages[
+    randomIndex
+  ]
+
+    .replace(
+      /\{winner\}/g,
+      escapeHtml(winner)
+    )
+
+    .replace(
+      /\{loser\}/g,
+      escapeHtml(loser)
+    );
+
+}
+
+
+/* =====================================================
    SCORE
 ===================================================== */
 
@@ -2081,7 +2181,8 @@ function score(
 
 
   /* =================================================
-     BUST SEULEMENT SI LE SCORE PASSE SOUS 0
+     BUST :
+     UNIQUEMENT SI LE SCORE PASSE SOUS 0
   ================================================= */
 
   if(
@@ -2155,19 +2256,32 @@ function score(
       true;
 
 
+    const winner =
+      player.name;
+
+
+    const loser =
+      state.players[
+        state.active === 0
+          ? 1
+          : 0
+      ].name;
+
+
+    const victoryMessage =
+      getVictoryMessage(
+        winner,
+        loser
+      );
+
+
     state.history.push({
 
       player:
         player.name,
 
       text:
-        `${state.darts
-          .map(
-            dart =>
-              dart.label
-          )
-          .join(", ")}
-        — GAGNÉ 🎯`
+        `🎯 VICTOIRE — ${victoryMessage}`
 
     });
 
@@ -2176,9 +2290,8 @@ function score(
 
 
     el("winnerText")
-      .textContent =
-
-        `${player.name} gagne la partie !`;
+      .innerHTML =
+        victoryMessage;
 
 
     el("winModal")
